@@ -1,0 +1,11 @@
+.paintings {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.paintingImage {
+  width: 360px;
+  height: 275px;
+  background-color: red;
+  margin: 30px;
+}

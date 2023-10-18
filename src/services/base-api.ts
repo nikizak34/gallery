@@ -16,7 +16,7 @@ export const baseApi = createApi({
 
 export const { useGetPaintingQuery } = baseApi;
 
-export type PaintingsType = {
+export type PaintingType = {
   authorId: number;
   created: string;
   id: number;

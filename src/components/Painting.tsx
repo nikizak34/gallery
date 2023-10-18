@@ -1,29 +1,18 @@
 import React from "react";
-import { PaintingsType, useGetPaintingQuery } from "../services/base-api";
-import s from "./Painting.module.scss";
+import { PaintingType, useGetPaintingQuery } from "../services/base-api";
+import { Paint } from "./Paint";
 
-type DataType = {
-  data: PaintingsType[];
+type PaintingDataType = {
+  data: PaintingType[];
 };
 
 export function Painting() {
-  const { data } = useGetPaintingQuery<DataType>();
-
+  const { data } = useGetPaintingQuery<PaintingDataType>();
   return (
     <div>
-      <div className="App">
-        {data?.map((el) => {
-          return (
-            <div key={el.id} className={s.paintings}>
-              <img
-                className={s.paintingImage}
-                src={el.imageUrl}
-                alt="panting"
-              />
-            </div>
-          );
-        })}
-      </div>
+      {data?.map((el) => {
+        return <Paint paint={el} />;
+      })}
     </div>
   );
 }

@@ -1,17 +1,28 @@
 import React from "react";
 import { PaintingType, useGetPaintingQuery } from "../services/base-api";
-import { Paint } from "./Paint";
+import { Painting } from "./Paint";
 
 type PaintingDataType = {
   data: PaintingType[];
 };
+type Props = {
+  currentPage: number;
+};
 
-export function Painting() {
-  const { data } = useGetPaintingQuery<PaintingDataType>();
+export function Paintings({ currentPage }: Props) {
+  const { data: paintingData } =
+    useGetPaintingQuery<PaintingDataType>(currentPage);
+
   return (
-    <div>
-      {data?.map((el) => {
-        return <Paint paint={el} />;
+    <div
+      style={{
+        display: "flex",
+        flexWrap: "wrap",
+        justifyContent: "center",
+      }}
+    >
+      {paintingData?.map((el) => {
+        return <Painting key={el.id} painting={el} />;
       })}
     </div>
   );

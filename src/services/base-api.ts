@@ -7,14 +7,21 @@ export const baseApi = createApi({
   }),
   endpoints: (builder) => {
     return {
-      getPainting: builder.query<any, void>({
-        query: () => `paintings`,
+      getPainting: builder.query<any, number>({
+        query: (page = 1) => `paintings?_page=${page}&_limit=12`,
+      }),
+      getAuthors: builder.query<any, void>({
+        query: () => `authors`,
+      }),
+      getLocation: builder.query<any, void>({
+        query: () => `location`,
       }),
     };
   },
 });
 
-export const { useGetPaintingQuery } = baseApi;
+export const { useGetPaintingQuery, useGetAuthorsQuery, useGetLocationQuery } =
+  baseApi;
 
 export type PaintingType = {
   authorId: number;

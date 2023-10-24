@@ -1,16 +1,13 @@
 import React, { useState } from "react";
 import s from "./Painting.module.scss";
-import { PaintingType, useGetAuthorsQuery } from "../services/base-api";
+import {
+  AuthorsDataType,
+  PaintingType,
+  useGetAuthorsQuery,
+} from "../../services/base-api";
 
 type Props = {
   painting: PaintingType;
-};
-type AuthorsType = {
-  id: number;
-  name: string;
-};
-type AuthorsDataType = {
-  data: AuthorsType[];
 };
 
 export function Painting({ painting }: Props) {
@@ -23,7 +20,7 @@ export function Painting({ painting }: Props) {
   const handleMouseOut = () => {
     setIsHovering(false);
   };
-  const mapAuthor = authorData?.map((el) =>
+  const mappedAuthor = authorData?.map((el) =>
     el.id === painting.authorId ? <span key={el.id}>{el.name}</span> : null,
   );
   return (
@@ -38,7 +35,7 @@ export function Painting({ painting }: Props) {
       {isHovering ? (
         <div className={s.nameBlog}>
           <div>{painting.name}</div>
-          {mapAuthor}
+          {mappedAuthor}
         </div>
       ) : (
         <div className={s.name}>{painting.name}</div>

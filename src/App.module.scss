@@ -2,7 +2,227 @@
   box-sizing: border-box;
   display: block;
   overflow: hidden;
+  padding-bottom: 100px;
 }
 
 .container {
+}
+
+.input {
+  width: 265px;
+  height: 45px;
+  border-radius: 8px;
+  border: 1px solid rgba(0, 0, 0, 0.3);
+  background: #fff;
+  color: rgba(0, 0, 0, 0.3);
+  font-feature-settings:
+    "clig" off,
+    "liga" off;
+  font-family: Roboto;
+  font-size: 13px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  padding-left: 15px;
+}
+
+.paginator {
+  button {
+    width: 39px;
+    height: 38px;
+    user-select: none;
+    cursor: pointer;
+    border: 1px solid black;
+    border-right: none;
+    color: black;
+    background: inherit;
+    font-weight: 500;
+
+    &:first-of-type {
+      border-radius: 8px 0 0 8px;
+      cursor: pointer;
+    }
+
+    &:last-child {
+      border-radius: 0 8px 8px 0;
+      border-right: 1px solid;
+      cursor: pointer;
+    }
+
+    &:only-child {
+      border-radius: 8px;
+    }
+
+    &:hover {
+      background: #ededed;
+      color: black;
+      border-color: black;
+    }
+
+    &:disabled {
+      border-color: #b3b3b3;
+      color: #b3b3b3;
+
+      &:hover {
+        cursor: auto;
+        background: inherit;
+      }
+    }
+
+    &--dark {
+      border: 1px solid white;
+      color: white;
+      border-right: none;
+
+      &:hover {
+        background: #464646;
+        color: white;
+        border-color: white;
+      }
+
+      &:disabled {
+        border-color: #4c4c4c;
+        color: #4c4c4c;
+      }
+    }
+
+    &.PaginationPageWithActive {
+      background: black;
+      color: white;
+      border-color: black;
+
+      &:hover {
+        cursor: auto;
+        background: black;
+        color: white;
+        border-color: black;
+      }
+
+      &--dark {
+        background: white;
+        color: black;
+        border-color: white;
+
+        &:hover {
+          background: white;
+          color: black;
+          border-color: white;
+        }
+      }
+    }
+  }
+}
+
+/*.select {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  width: 265px;
+  height: 46px;
+  border-radius: 8px;
+  box-shadow: 0px 0px 0px 1px black;
+  color: black;
+  box-sizing: border-box;
+  background: white;
+  cursor: pointer;
+}*/
+.SelectTrigger {
+  border-radius: 8px 8px 0 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 15px;
+  font-size: 13px;
+  line-height: 1;
+  height: 35px;
+  gap: 7px;
+  background-color: white;
+  color: var(--violet-11);
+  box-shadow: 0 2px 10px var(--black-a7);
+  position: relative;
+}
+.SelectTrigger:hover {
+  background-color: var(--mauve-3);
+}
+.SelectTrigger:focus {
+  box-shadow: 0 0 0 2px black;
+}
+.SelectTrigger[data-placeholder] {
+  color: var(--violet-9);
+}
+
+.SelectIcon {
+  color: Var(--violet-11);
+}
+
+.SelectContent {
+  border-radius: 0 0 8px 8px;
+  position: absolute;
+  left: 17px;
+  top: 60px;
+  overflow: hidden;
+  background-color: white;
+  box-shadow:
+    0px 10px 38px -10px rgba(22, 23, 24, 0.35),
+    0px 10px 20px -15px rgba(22, 23, 24, 0.2);
+}
+
+.SelectViewport {
+  padding: 7px;
+}
+
+.SelectItem {
+  font-size: 13px;
+  line-height: 1;
+  color: var(--violet-11);
+  border-radius: 3px;
+  display: flex;
+  align-items: center;
+  height: 25px;
+  padding: 0 35px 0 25px;
+  position: relative;
+  user-select: none;
+}
+.SelectItem[data-disabled] {
+  color: var(--mauve-8);
+  pointer-events: none;
+}
+.SelectItem[data-highlighted] {
+  outline: none;
+  background-color: var(--violet-9);
+  color: var(--violet-1);
+}
+
+.SelectLabel {
+  padding: 0 25px;
+  font-size: 12px;
+  line-height: 25px;
+  color: var(--mauve-11);
+}
+
+.SelectSeparator {
+  height: 1px;
+  background-color: var(--violet-6);
+  margin: 5px;
+}
+
+.SelectItemIndicator {
+  position: absolute;
+  left: 0;
+  width: 25px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.SelectScrollButton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 25px;
+  background-color: white;
+  color: var(--violet-11);
+  cursor: default;
 }

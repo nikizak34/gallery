@@ -14,24 +14,23 @@ import { Select } from "./components/Select/Select";
 function App() {
   const [currentPage, setCurrentPage] = useState(1);
   const [find, setFind] = useState("");
-  const [valuE, setValuE] = useState("");
-  const [authorId, setAuthorId] = useState<number>(1);
-
+  const [AuthorValue, setAuthorValue] = useState("");
+  const [authorId, setAuthorId] = useState<any>("");
   const { data: paintingData } = useGetPaintingQuery<PaintingDataType>({
     currentPage,
     find,
     authorId,
   });
   const { data: authorData } = useGetAuthorsQuery<AuthorsDataType>();
-  const { data } = useGetPaintingFullQuery({ find });
+  const { data } = useGetPaintingFullQuery({ find, authorId });
+
   const onChangeText = (e: ChangeEvent<HTMLInputElement>) => {
     setFind(e?.target.value);
   };
   // eslint-disable-next-line no-unsafe-optional-chaining
   const pageNumber = Math.ceil(data?.length / 12);
-
-  const onChange = (value: string) => {
-    setValuE(value);
+  const onChangeAuthor = (value: string) => {
+    setAuthorValue(value);
     setAuthorId(
       Number(
         authorData
@@ -41,7 +40,6 @@ function App() {
       ),
     );
   };
-
   return (
     <div className={s.App}>
       <div>
@@ -58,7 +56,12 @@ function App() {
             placeholder="Name"
             type="text"
           />
-          <Select onChange={onChange} value={valuE} />
+          <Select
+            onChange={onChangeAuthor}
+            value={AuthorValue}
+            placeholder="Author"
+            data={authorData}
+          />
         </div>
         <Paintings paintingData={paintingData} />
         <div

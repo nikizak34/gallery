@@ -9,18 +9,18 @@ export const baseApi = createApi({
     return {
       getPainting: builder.query<PaintingDataType, GetPaintingRequest>({
         query: ({ currentPage = 1, find, authorId }) => {
-          return `paintings?_page=${currentPage}&_limit=12&name_like=${find}&authorId=${authorId}`;
+          return `paintings?_page=${currentPage}&_limit=12&name_like=${find}&authorId_like=${authorId}`;
         },
       }),
       getPaintingFull: builder.query<any, any>({
         query: ({ find, authorId }) => {
-          return `paintings?name_like=${find}&authorId=${authorId}`;
+          return `paintings?name_like=${find}&authorId_like=${authorId}`;
         },
       }),
       getAuthors: builder.query<AuthorsDataType, void>({
         query: () => `authors`,
       }),
-      getLocation: builder.query<any, void>({
+      getLocation: builder.query<LocationDataType, void>({
         query: () => `location`,
       }),
     };
@@ -49,7 +49,8 @@ export type PaintingType = {
 type GetPaintingRequest = {
   currentPage: number;
   find: string;
-  authorId?: number;
+  authorId?: any;
+  locationId?: any;
 };
 
 export type AuthorsDataType = {
@@ -58,4 +59,13 @@ export type AuthorsDataType = {
 export type AuthorsType = {
   id: number;
   name: string;
+};
+
+type LocationDataType = {
+  data: LocationType[];
+};
+
+type LocationType = {
+  id: number;
+  location: string;
 };

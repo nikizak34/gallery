@@ -6,10 +6,11 @@ import {
 } from "react";
 import { ChevronDownIcon, ChevronUpIcon } from "@radix-ui/react-icons";
 import * as SelectGroup from "@radix-ui/react-select";
-import { AuthorsType } from "../../services/base-api";
+import { AuthorsDataType, useGetAuthorsQuery } from "../../services/base-api";
 
 export type SelectProps = {
-  authorData: AuthorsType[];
+  value: string;
+  onChange: (value: string) => void;
 } & ComponentPropsWithoutRef<typeof SelectGroup.Root>;
 
 type ItemProps = {
@@ -30,7 +31,7 @@ export const Select = forwardRef<
   SelectProps
 >((props, ref) => {
   const [open, setOpen] = useState<boolean>(false);
-  const [valuE, setValuE] = useState("");
+  const { data: authorData } = useGetAuthorsQuery<AuthorsDataType>();
 
   const handlerOpenedMenu = () => {
     setOpen(!open);
@@ -39,10 +40,10 @@ export const Select = forwardRef<
   return (
     <div>
       <SelectGroup.Root
-        value={valuE}
+        value={props.value}
         onOpenChange={handlerOpenedMenu}
         onValueChange={(value) => {
-          setValuE(value);
+          props.onChange(value);
         }}
       >
         <SelectGroup.Trigger
@@ -58,7 +59,7 @@ export const Select = forwardRef<
         >
           <div>
             <div>
-              <SelectGroup.Value />
+              <SelectGroup.Value placeholder="Author" />
             </div>
             <div>{open ? <ChevronUpIcon /> : <ChevronDownIcon />}</div>
           </div>
@@ -66,7 +67,7 @@ export const Select = forwardRef<
         <SelectGroup.Content position="popper">
           <SelectGroup.Viewport>
             <SelectGroup.Group>
-              {props.authorData?.map((item) => {
+              {authorData?.map((item) => {
                 return <Item key={item.id}>{item.name}</Item>;
               })}
             </SelectGroup.Group>

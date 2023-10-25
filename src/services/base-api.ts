@@ -8,13 +8,13 @@ export const baseApi = createApi({
   endpoints: (builder) => {
     return {
       getPainting: builder.query<PaintingDataType, GetPaintingRequest>({
-        query: ({ currentPage = 1, find }) => {
-          return `paintings?_page=${currentPage}&_limit=12&name_like=${find}`;
+        query: ({ currentPage = 1, find, authorId }) => {
+          return `paintings?_page=${currentPage}&_limit=12&name_like=${find}&authorId=${authorId}`;
         },
       }),
       getPaintingFull: builder.query<any, any>({
-        query: (find) => {
-          return `paintings?name_like=${find}`;
+        query: ({ find, authorId }) => {
+          return `paintings?name_like=${find}&authorId=${authorId}`;
         },
       }),
       getAuthors: builder.query<AuthorsDataType, void>({

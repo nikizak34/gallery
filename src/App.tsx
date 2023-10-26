@@ -26,6 +26,7 @@ function App() {
 
   const onChangeText = (e: ChangeEvent<HTMLInputElement>) => {
     setFind(e?.target.value);
+    setCurrentPage(1);
   };
   // eslint-disable-next-line no-unsafe-optional-chaining
   const pageNumber = Math.ceil(data?.length / 12);
@@ -39,6 +40,7 @@ function App() {
           .join(""),
       ),
     );
+    setCurrentPage(1);
   };
   return (
     <div className={s.App}>

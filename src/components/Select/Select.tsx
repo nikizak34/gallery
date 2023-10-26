@@ -65,7 +65,10 @@ export const Select = forwardRef<
             <div>{open ? <ChevronUpIcon /> : <ChevronDownIcon />}</div>
           </div>
         </SelectGroup.Trigger>
-        <SelectGroup.Content position="popper">
+        <SelectGroup.Content
+          style={{ backgroundColor: "white", textAlign: "center" }}
+          position="popper"
+        >
           <SelectGroup.Viewport>
             <SelectGroup.Group>
               {props.data?.map((item) => {

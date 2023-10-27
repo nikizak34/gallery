@@ -14,8 +14,8 @@ import { Select } from "./components/Select/Select";
 function App() {
   const [currentPage, setCurrentPage] = useState(1);
   const [find, setFind] = useState("");
-  const [AuthorValue, setAuthorValue] = useState("");
-  const [authorId, setAuthorId] = useState<any>("");
+  const [titleAuthorValue, setTitleAuthorValue] = useState("");
+  const [authorId, setAuthorId] = useState<string>("");
   const { data: paintingData } = useGetPaintingQuery<PaintingDataType>({
     currentPage,
     find,
@@ -31,16 +31,19 @@ function App() {
   // eslint-disable-next-line no-unsafe-optional-chaining
   const pageNumber = Math.ceil(data?.length / 12);
   const onChangeAuthor = (value: string) => {
-    setAuthorValue(value);
+    setTitleAuthorValue(value);
     setAuthorId(
-      Number(
-        authorData
-          ?.filter((el) => el.name === value)
-          .map((el) => el.id)
-          .join(""),
-      ),
+      authorData
+        ?.filter((el) => el.name === value)
+        .map((el) => el.id)
+        .join(""),
     );
     setCurrentPage(1);
+  };
+  const OnClickResetValue = () => {
+    setTitleAuthorValue("");
+    setAuthorId("");
+    setFind("");
   };
   return (
     <div className={s.App}>
@@ -53,6 +56,7 @@ function App() {
           }}
         >
           <input
+            value={find}
             onChange={onChangeText}
             className={s.input}
             placeholder="Name"
@@ -60,10 +64,13 @@ function App() {
           />
           <Select
             onChange={onChangeAuthor}
-            value={AuthorValue}
+            value={titleAuthorValue}
             placeholder="Author"
             data={authorData}
           />
+          <button onClick={OnClickResetValue} type="button">
+            res
+          </button>
         </div>
         <Paintings paintingData={paintingData} />
         <div

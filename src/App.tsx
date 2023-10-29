@@ -82,7 +82,6 @@ function App() {
         >
           {data?.length > 12 && (
             <Pagination
-              className={s.paginator}
               currentPage={currentPage}
               onChange={setCurrentPage}
               pagesAmount={pageNumber}

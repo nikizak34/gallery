@@ -13,6 +13,7 @@ export function Paintings({ paintingData }: Props) {
         display: "flex",
         flexWrap: "wrap",
         justifyContent: "center",
+        marginBottom: "40px",
       }}
     >
       {paintingData?.map((el) => {

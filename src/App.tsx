@@ -1,7 +1,9 @@
 import React, { ChangeEvent, useState } from "react";
-import { Pagination } from "fwt-internship-uikit";
+import { Pagination, Select } from "fwt-internship-uikit";
 import { Paintings } from "./components/Paintings/Paintings";
 import s from "./App.module.scss";
+import logo from "./assets/image/Frame 238.svg";
+import theme from "./assets/image/Frame 237.svg";
 import {
   AuthorsDataType,
   PaintingDataType,
@@ -9,12 +11,11 @@ import {
   useGetPaintingFullQuery,
   useGetPaintingQuery,
 } from "./services/base-api";
-import { Select } from "./components/Select/Select";
 
 function App() {
   const [currentPage, setCurrentPage] = useState(1);
   const [find, setFind] = useState("");
-  const [titleAuthorValue, setTitleAuthorValue] = useState("");
+  const [titleAuthorValue, setTitleAuthorValue] = useState("Author");
   const [authorId, setAuthorId] = useState<string>("");
   const { data: paintingData } = useGetPaintingQuery<PaintingDataType>({
     currentPage,
@@ -40,19 +41,33 @@ function App() {
     );
     setCurrentPage(1);
   };
-  const OnClickResetValue = () => {
-    setTitleAuthorValue("");
-    setAuthorId("");
-    setFind("");
-  };
   return (
     <div className={s.App}>
       <div>
         <div
           style={{
             display: "flex",
-            justifyContent: "space-around",
-            padding: "50px 0",
+            justifyContent: "center",
+            alignItems: "center",
+            marginBottom: "35px",
+          }}
+        >
+          <div>
+            <img src={logo} alt="" />
+          </div>
+          <div style={{ paddingLeft: "1040px" }}>
+            <img src={theme} alt="" />
+          </div>
+        </div>
+
+        <div
+          style={{
+            display: "flex",
+            flexWrap: "wrap",
+            gap: "20px",
+            margin: "10px",
+            marginBottom: "45px",
+            justifyContent: "center",
           }}
         >
           <input
@@ -64,22 +79,28 @@ function App() {
           />
           <Select
             onChange={onChangeAuthor}
+            isDarkTheme={false}
             value={titleAuthorValue}
-            placeholder="Author"
-            data={authorData}
+            disabled={false}
+            options={authorData}
+          />{" "}
+          <Select
+            onChange={onChangeAuthor}
+            isDarkTheme={false}
+            value={titleAuthorValue}
+            disabled={false}
+            options={authorData}
+          />{" "}
+          <Select
+            onChange={onChangeAuthor}
+            isDarkTheme={false}
+            value={titleAuthorValue}
+            disabled={false}
+            options={authorData}
           />
-          <button onClick={OnClickResetValue} type="button">
-            res
-          </button>
         </div>
         <Paintings paintingData={paintingData} />
-        <div
-          style={{
-            padding: "100px",
-            display: "flex",
-            justifyContent: "center",
-          }}
-        >
+        <div className={s.pag}>
           {data?.length > 12 && (
             <Pagination
               currentPage={currentPage}

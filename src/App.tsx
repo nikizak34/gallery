@@ -11,19 +11,21 @@ import {
   useGetPaintingFullQuery,
   useGetPaintingQuery,
 } from "./services/base-api";
+import { useDebounce } from "./hooks/useDebounce";
 
 function App() {
   const [currentPage, setCurrentPage] = useState(1);
   const [find, setFind] = useState("");
+  const search = useDebounce(find, 1000);
   const [titleAuthorValue, setTitleAuthorValue] = useState("Author");
   const [authorId, setAuthorId] = useState<string>("");
   const { data: paintingData } = useGetPaintingQuery<PaintingDataType>({
     currentPage,
-    find,
+    search,
     authorId,
   });
   const { data: authorData } = useGetAuthorsQuery<AuthorsDataType>();
-  const { data } = useGetPaintingFullQuery({ find, authorId });
+  const { data } = useGetPaintingFullQuery({ search, authorId });
 
   const onChangeText = (e: ChangeEvent<HTMLInputElement>) => {
     setFind(e?.target.value);

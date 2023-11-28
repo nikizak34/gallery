@@ -15,7 +15,8 @@ import {
 } from "./services/base-api";
 import { useDebounce } from "./hooks/useDebounce";
 import { useTheme } from "./hooks/useTheme";
-import { SelectCreated, SelectS } from "./components/Select/Select";
+import { SelectS } from "./components/Select/Select";
+import { AccordionComponent } from "./components/Accordion/Accordion";
 
 function App() {
   const { theme, setTheme } = useTheme();
@@ -26,15 +27,26 @@ function App() {
   const [location, setLocation] = useState("Location");
   const [authorId, setAuthorId] = useState("");
   const [locationId, setLocationId] = useState("");
+  const [fromCreated, setFromCreated] = useState("1");
+  const [beforeCreated, setBeforeCreated] = useState("3000");
   const { data: paintingData } = useGetPaintingQuery<PaintingDataType>({
     currentPage,
     search,
     authorId,
     locationId,
+    fromCreated,
+    beforeCreated,
   });
   const { data: locationData } = useGetLocationQuery<LocationDataType>();
   const { data: authorData } = useGetAuthorsQuery<AuthorsDataType>();
-  const { data } = useGetPaintingFullQuery({ search, authorId, locationId });
+  const { data } = useGetPaintingFullQuery<PaintingDataType>({
+    search,
+    authorId,
+    locationId,
+    fromCreated,
+    beforeCreated,
+  });
+  /* const before = data?.map((el) => +el.created).sort((a, b) => b - a)[0]; */
 
   const onChangeText = (e: ChangeEvent<HTMLInputElement>) => {
     setFind(e?.target.value);
@@ -107,26 +119,21 @@ function App() {
             disabled={false}
             options={authorData}
           />{" "}
-          {/*     <Select
-            onChange={onChangeLocation}
-            isDarkTheme={dark}
-            value={location}
-            disabled={false}
-            options={locationData}
-          /> */}
           <SelectS
             data={locationData}
             value={location}
             onChange={onChangeLocation}
           />
-          <SelectCreated />
-          {/*      <Select
-            onChange={onChangeAuthor}
-            isDarkTheme={dark}
-            value={titleAuthorValue}
-            disabled={false}
-            options={authorData}
-          /> */}
+          <AccordionComponent
+            valueFromCreated={fromCreated}
+            onChange={(e: ChangeEvent<HTMLInputElement>) =>
+              setFromCreated(e.currentTarget.value)
+            }
+            valueBeforeCreated={beforeCreated}
+            onChangeBeforeCreated={(e: ChangeEvent<HTMLInputElement>) =>
+              setBeforeCreated(e.currentTarget.value)
+            }
+          />
         </div>
         <Paintings paintingData={paintingData} />
         <div className={s.pag}>

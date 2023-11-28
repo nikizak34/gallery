@@ -10,6 +10,7 @@
   height: 275px;
   background-color: lightblue;
   cursor: pointer;
+  border-radius: 22px 22px 22px 22px;
   @media screen and (max-width: 1157px) {
     width: 300px;
     height: 230px;
@@ -41,10 +42,11 @@
   font-weight: 700;
   text-transform: capitalize;
   transition: 0.4s;
+  border-radius: 0 0 22px 22px;
 }
 
 .nameBlog {
   @extend .name;
-  height: 145px;
+  height: 52%;
   cursor: pointer;
 }

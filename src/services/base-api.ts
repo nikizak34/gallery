@@ -7,14 +7,27 @@ export const baseApi = createApi({
   }),
   endpoints: (builder) => {
     return {
-      getPainting: builder.query<PaintingDataType, GetPaintingRequest>({
-        query: ({ currentPage = 1, search, authorId, locationId }) => {
-          return `paintings?_page=${currentPage}&_limit=12&name_like=${search}&authorId_like=${authorId}&locationId_like=${locationId}`;
+      getPainting: builder.query<PaintingDataType, any>({
+        query: ({
+          currentPage = 1,
+          search,
+          authorId,
+          locationId,
+          fromCreated,
+          beforeCreated,
+        }) => {
+          return `paintings?_page=${currentPage}&_limit=12&name_like=${search}&authorId_like=${authorId}&locationId_like=${locationId}&created_gte=${fromCreated}&created_lte=${beforeCreated}`;
         },
       }),
-      getPaintingFull: builder.query<any, any>({
-        query: ({ search, authorId, locationId }) => {
-          return `paintings?name_like=${search}&authorId_like=${authorId}&locationId_like=${locationId}`;
+      getPaintingFull: builder.query<PaintingDataType, GetPaintingRequest>({
+        query: ({
+          search,
+          authorId,
+          locationId,
+          fromCreated,
+          beforeCreated,
+        }) => {
+          return `paintings?name_like=${search}&authorId_like=${authorId}&locationId_like=${locationId}&created_gte=${fromCreated}&created_lte=${beforeCreated}`;
         },
       }),
       getAuthors: builder.query<AuthorsDataType, void>({
@@ -47,10 +60,12 @@ export type PaintingType = {
 };
 
 type GetPaintingRequest = {
-  currentPage: number;
-  search: string;
+  currentPage?: number;
+  search?: string;
   authorId?: any;
   locationId?: any;
+  fromCreated?: string;
+  beforeCreated?: string;
 };
 
 export type AuthorsDataType = {

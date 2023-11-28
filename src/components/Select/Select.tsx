@@ -5,15 +5,14 @@ import {
   useState,
 } from "react";
 import { ChevronDownIcon, ChevronUpIcon } from "@radix-ui/react-icons";
-import * as SelectGroup from "@radix-ui/react-select";
-import { AuthorsType } from "../../services/base-api";
+import * as Select from "@radix-ui/react-select";
+import { LocationType } from "../../services/base-api";
 
 export type SelectProps = {
   value: string;
   onChange: (value: string) => void;
-  placeholder: string;
-  data: AuthorsType[];
-} & ComponentPropsWithoutRef<typeof SelectGroup.Root>;
+  data: LocationType[];
+} & ComponentPropsWithoutRef<typeof Select.Root>;
 
 type ItemProps = {
   children: string;
@@ -22,15 +21,80 @@ type ItemProps = {
 export function Item(props: ItemProps) {
   const { children } = props;
   return (
-    <SelectGroup.Item value={children}>
-      <SelectGroup.ItemText>{children}</SelectGroup.ItemText>
-    </SelectGroup.Item>
+    <Select.Item value={children}>
+      <Select.ItemText>{children}</Select.ItemText>
+    </Select.Item>
   );
 }
 
-export const Select = forwardRef<
-  ElementRef<typeof SelectGroup.Root>,
-  SelectProps
+export const SelectS = forwardRef<ElementRef<typeof Select.Root>, SelectProps>(
+  (props, ref) => {
+    const [open, setOpen] = useState<boolean>(false);
+
+    const handlerOpenedMenu = () => {
+      setOpen(!open);
+    };
+
+    return (
+      <div>
+        <Select.Root
+          value={props.value}
+          onOpenChange={handlerOpenedMenu}
+          onValueChange={(value) => {
+            props.onChange(value);
+          }}
+        >
+          <Select.Trigger
+            style={{
+              width: "265px",
+              height: "45px",
+              borderRadius: "8px",
+              border: "1px solid rgba(0, 0, 0, 0.30)",
+              background: "#FFF",
+            }}
+            tabIndex={0}
+            ref={ref}
+          >
+            <Select.Value />
+            Location
+            {open ? <ChevronUpIcon /> : <ChevronDownIcon />}
+          </Select.Trigger>
+          <Select.Content
+            position="popper"
+            sideOffset={1}
+            style={{ backgroundColor: "white", textAlign: "center" }}
+          >
+            <Select.Viewport>
+              <Select.Group>
+                {props.data?.map((item) => {
+                  return <Item key={item.id}>{item.location}</Item>;
+                })}
+              </Select.Group>
+            </Select.Viewport>
+          </Select.Content>
+        </Select.Root>
+      </div>
+    );
+  },
+);
+
+export type SelectCreatedProps = {} & ComponentPropsWithoutRef<
+  typeof Select.Root
+>;
+
+export function ItemCreated(props: any) {
+  const { children } = props;
+  return (
+    <Select.Item value={children}>
+      <Select.ItemText>{children}</Select.ItemText>
+      <Select.ItemText>{children}</Select.ItemText>
+    </Select.Item>
+  );
+}
+
+export const SelectCreated = forwardRef<
+  ElementRef<typeof Select.Root>,
+  SelectCreatedProps
 >((props, ref) => {
   const [open, setOpen] = useState<boolean>(false);
 
@@ -40,14 +104,8 @@ export const Select = forwardRef<
 
   return (
     <div>
-      <SelectGroup.Root
-        value={props.value}
-        onOpenChange={handlerOpenedMenu}
-        onValueChange={(value) => {
-          props.onChange(value);
-        }}
-      >
-        <SelectGroup.Trigger
+      <Select.Root value={props.value} onOpenChange={handlerOpenedMenu}>
+        <Select.Trigger
           style={{
             width: "265px",
             height: "45px",
@@ -58,26 +116,22 @@ export const Select = forwardRef<
           tabIndex={0}
           ref={ref}
         >
-          <div>
-            <div>
-              <SelectGroup.Value placeholder={props.placeholder} />
-            </div>
-            <div>{open ? <ChevronUpIcon /> : <ChevronDownIcon />}</div>
-          </div>
-        </SelectGroup.Trigger>
-        <SelectGroup.Content
-          style={{ backgroundColor: "white", textAlign: "center" }}
+          <Select.Value />
+          Location
+          {open ? <ChevronUpIcon /> : <ChevronDownIcon />}
+        </Select.Trigger>
+        <Select.Content
           position="popper"
+          sideOffset={1}
+          style={{ backgroundColor: "white", textAlign: "center" }}
         >
-          <SelectGroup.Viewport>
-            <SelectGroup.Group>
-              {props.data?.map((item) => {
-                return <Item key={item.id}>{item.name}</Item>;
-              })}
-            </SelectGroup.Group>
-          </SelectGroup.Viewport>
-        </SelectGroup.Content>
-      </SelectGroup.Root>
+          <Select.Viewport>
+            <Select.Group>
+              <ItemCreated />
+            </Select.Group>
+          </Select.Viewport>
+        </Select.Content>
+      </Select.Root>
     </div>
   );
 });

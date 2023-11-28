@@ -5,11 +5,24 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  background-color: var(--background-color);
+  transition:
+    color 500ms linear,
+    background-color 200ms linear;
+  overflow-x: hidden;
 }
 
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
+}
+
+html[data-theme="dark"] {
+  --button-text-color: #ffffff;
+  --button-background-color: #4e005c;
+  --button-border-color: #ba8fc2;
+  --background-color: #000;
+  --icon-color: #ffffff;
 }
 
 .Pagination {
@@ -138,7 +151,7 @@ code {
   &--dark {
     box-shadow: 0px 0px 0px 1px white;
     color: white;
-    background: #464646;
+    background: #000;
   }
 
   &__title {
@@ -431,19 +444,4 @@ code {
   overflow-y: scroll;
   scrollbar-width: none;
   -ms-overflow-style: none;
-}
-
-.hee {
-  cursor: pointer;
-  width: 15px;
-  height: 15px;
-  position: absolute;
-  content: "";
-  right: 35px;
-  top: 16px;
-  background-color: white;
-}
-
-.hee2 {
-  position: relative;
 }

@@ -1,14 +1,14 @@
 .painting {
   position: relative;
+  margin: 10px;
+  display: flex;
+  flex-direction: column;
 }
 
 .paintingImage {
   width: 360px;
   height: 275px;
   background-color: lightblue;
-  display: flex;
-  flex-direction: column;
-  margin: 10px;
   cursor: pointer;
   @media screen and (max-width: 1157px) {
     width: 300px;
@@ -30,11 +30,10 @@
 
 .name {
   position: absolute;
-  top: 250px;
+  bottom: 0;
   left: 0;
-  padding: 5px 0 0 15px;
   background-color: rgba(255, 255, 255, 0.75);
-  width: 360px;
+  width: 100%;
   height: 30px;
   font-family: Roboto;
   font-size: 18px;
@@ -46,7 +45,6 @@
 
 .nameBlog {
   @extend .name;
-  top: 140px;
   height: 145px;
   cursor: pointer;
 }

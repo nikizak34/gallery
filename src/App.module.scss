@@ -1,6 +1,10 @@
 .App {
-  overflow: hidden;
-  max-width: 1345px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  max-width: 1150px;
+  min-height: calc(100vh - 96px);
   margin: 0 auto;
   padding: 35px 0 97px 0;
 }
@@ -33,20 +37,14 @@
 }
 
 .pag {
-  padding-right: 850px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  margin: 10px;
-  @media screen and (max-width: 1157px) {
-    padding-right: 660px;
-  }
-  @media screen and (max-width: 1024px) {
-  }
-  @media screen and (max-width: 768px) {
-    padding-right: 420px;
-  }
-  @media screen and (max-width: 320px) {
-    padding-right: 0;
-  }
+  width: 100%;
+}
+
+.arrowSvg {
+  fill: var(--icon-color);
+  cursor: pointer;
+}
+
+.SelectTrigger[data-placeholder] {
+  color: red;
 }

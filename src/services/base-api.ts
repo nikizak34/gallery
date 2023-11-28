@@ -8,20 +8,20 @@ export const baseApi = createApi({
   endpoints: (builder) => {
     return {
       getPainting: builder.query<PaintingDataType, GetPaintingRequest>({
-        query: ({ currentPage = 1, search, authorId }) => {
-          return `paintings?_page=${currentPage}&_limit=12&name_like=${search}&authorId_like=${authorId}`;
+        query: ({ currentPage = 1, search, authorId, locationId }) => {
+          return `paintings?_page=${currentPage}&_limit=12&name_like=${search}&authorId_like=${authorId}&locationId_like=${locationId}`;
         },
       }),
       getPaintingFull: builder.query<any, any>({
-        query: ({ search, authorId }) => {
-          return `paintings?name_like=${search}&authorId_like=${authorId}`;
+        query: ({ search, authorId, locationId }) => {
+          return `paintings?name_like=${search}&authorId_like=${authorId}&locationId_like=${locationId}`;
         },
       }),
       getAuthors: builder.query<AuthorsDataType, void>({
         query: () => `authors`,
       }),
       getLocation: builder.query<LocationDataType, void>({
-        query: () => `location`,
+        query: () => `locations`,
       }),
     };
   },
@@ -61,11 +61,11 @@ export type AuthorsType = {
   name: string;
 };
 
-type LocationDataType = {
+export type LocationDataType = {
   data: LocationType[];
 };
 
-type LocationType = {
+export type LocationType = {
   id: number;
   location: string;
 };

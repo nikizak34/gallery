@@ -2,30 +2,39 @@ import React, { ChangeEvent, useState } from "react";
 import { Pagination, Select } from "fwt-internship-uikit";
 import { Paintings } from "./components/Paintings/Paintings";
 import s from "./App.module.scss";
-import logo from "./assets/image/Frame 238.svg";
-import theme from "./assets/image/Frame 237.svg";
+import { ReactComponent as Logo } from "./assets/image/Frame 238.svg";
+import { ReactComponent as Theme } from "./assets/image/Frame 237.svg";
 import {
   AuthorsDataType,
+  LocationDataType,
   PaintingDataType,
   useGetAuthorsQuery,
+  useGetLocationQuery,
   useGetPaintingFullQuery,
   useGetPaintingQuery,
 } from "./services/base-api";
 import { useDebounce } from "./hooks/useDebounce";
+import { useTheme } from "./hooks/useTheme";
+import { SelectCreated, SelectS } from "./components/Select/Select";
 
 function App() {
+  const { theme, setTheme } = useTheme();
   const [currentPage, setCurrentPage] = useState(1);
   const [find, setFind] = useState("");
   const search = useDebounce(find, 1000);
   const [titleAuthorValue, setTitleAuthorValue] = useState("Author");
-  const [authorId, setAuthorId] = useState<string>("");
+  const [location, setLocation] = useState("Location");
+  const [authorId, setAuthorId] = useState("");
+  const [locationId, setLocationId] = useState("");
   const { data: paintingData } = useGetPaintingQuery<PaintingDataType>({
     currentPage,
     search,
     authorId,
+    locationId,
   });
+  const { data: locationData } = useGetLocationQuery<LocationDataType>();
   const { data: authorData } = useGetAuthorsQuery<AuthorsDataType>();
-  const { data } = useGetPaintingFullQuery({ search, authorId });
+  const { data } = useGetPaintingFullQuery({ search, authorId, locationId });
 
   const onChangeText = (e: ChangeEvent<HTMLInputElement>) => {
     setFind(e?.target.value);
@@ -43,31 +52,43 @@ function App() {
     );
     setCurrentPage(1);
   };
+
+  const onChangeLocation = (value: string) => {
+    setLocation(value);
+    setLocationId(
+      locationData
+        ?.filter((el) => el.location === value)
+        .map((el) => el.id)
+        .join(""),
+    );
+    setCurrentPage(1);
+  };
+  const handleThemeClick = () => {
+    setTheme((curr) => (curr === "light" ? "dark" : "light"));
+  };
+  const dark = theme === "dark";
   return (
     <div className={s.App}>
       <div>
         <div
           style={{
+            minWidth: "100%",
             display: "flex",
-            justifyContent: "center",
             alignItems: "center",
-            marginBottom: "35px",
+            justifyContent: "space-between",
+            marginBottom: "60px",
           }}
         >
-          <div>
-            <img src={logo} alt="" />
-          </div>
-          <div style={{ paddingLeft: "1040px" }}>
-            <img src={theme} alt="" />
-          </div>
+          <Logo />
+          {/* eslint-disable-next-line jsx-a11y/click-events-have-key-events,jsx-a11y/no-noninteractive-element-interactions */}
+          <Theme onClick={handleThemeClick} className={s.arrowSvg} />
         </div>
-
         <div
           style={{
+            width: "100%",
             display: "flex",
             flexWrap: "wrap",
             gap: "20px",
-            margin: "10px",
             marginBottom: "45px",
             justifyContent: "center",
           }}
@@ -81,30 +102,37 @@ function App() {
           />
           <Select
             onChange={onChangeAuthor}
-            isDarkTheme={false}
+            isDarkTheme={dark}
             value={titleAuthorValue}
             disabled={false}
             options={authorData}
           />{" "}
-          <Select
-            onChange={onChangeAuthor}
-            isDarkTheme={false}
-            value={titleAuthorValue}
+          {/*     <Select
+            onChange={onChangeLocation}
+            isDarkTheme={dark}
+            value={location}
             disabled={false}
-            options={authorData}
-          />{" "}
-          <Select
-            onChange={onChangeAuthor}
-            isDarkTheme={false}
-            value={titleAuthorValue}
-            disabled={false}
-            options={authorData}
+            options={locationData}
+          /> */}
+          <SelectS
+            data={locationData}
+            value={location}
+            onChange={onChangeLocation}
           />
+          <SelectCreated />
+          {/*      <Select
+            onChange={onChangeAuthor}
+            isDarkTheme={dark}
+            value={titleAuthorValue}
+            disabled={false}
+            options={authorData}
+          /> */}
         </div>
         <Paintings paintingData={paintingData} />
         <div className={s.pag}>
           {data?.length > 12 && (
             <Pagination
+              isDarkTheme={dark}
               currentPage={currentPage}
               onChange={setCurrentPage}
               pagesAmount={pageNumber}

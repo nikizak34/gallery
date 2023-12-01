@@ -8,19 +8,20 @@ h3 {
   all: unset;
 }
 
-.AccordionRoot {
+.Root {
+  cursor: pointer;
 }
 
 .AccordionChevron {
-  color: var(--violet-10);
   transition: transform 300ms cubic-bezier(0.87, 0, 0.13, 1);
+  margin-right: 18px;
 }
 
 .AccordionTrigger {
   position: relative;
   display: flex;
   align-items: center;
-  justify-content: space-around;
+  justify-content: space-between;
   border-radius: 8px;
   border: 1px solid rgba(0, 0, 0, 0.3);
   background: #fff;
@@ -56,25 +57,12 @@ h3 {
   border-top: none;
 }
 
-.AccordionContent[data-state="closed"] {
-  animation: slideUp 400ms cubic-bezier(0.87, 0, 0.13, 1);
-}
-
 @keyframes slideDown {
   from {
     height: 0;
   }
   to {
     height: var(--radix-accordion-content-height);
-  }
-}
-
-@keyframes slideUp {
-  from {
-    height: var(--radix-accordion-content-height);
-  }
-  to {
-    height: 0;
   }
 }
 
@@ -91,13 +79,26 @@ h3 {
 
 input::-webkit-outer-spin-button,
 input::-webkit-inner-spin-button {
-  /* display: none; <- Crashes Chrome on hover */
   -webkit-appearance: none;
-  margin: 0; /* <-- Apparently some margin are still there even though it's hidden */
+  margin: 0;
 }
 
 input::placeholder {
   padding-left: 15px;
   color: rgba(0, 0, 0, 0.3);
   font-size: 13px;
+}
+
+.label {
+  margin-left: 15px;
+}
+
+.AccordionTriggerOpen {
+  @extend .AccordionTrigger;
+  border-bottom: none;
+  border-radius: 6px 6px 0 0;
+}
+
+.AccordionTriggerOpen > .AccordionChevron {
+  transform: rotate(180deg);
 }

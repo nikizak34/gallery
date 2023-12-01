@@ -31,7 +31,11 @@ export function Painting({ painting }: Props) {
       onMouseOut={handleMouseOut}
       className={s.painting}
     >
-      <img src={painting.imageUrl} className={s.paintingImage} alt="panting" />
+      <img
+        src={`https://test-front.framework.team/${painting.imageUrl}`}
+        className={s.paintingImage}
+        alt="panting"
+      />
       {isHovering ? (
         <div className={s.nameBlog}>
           <div>{painting.name}</div>

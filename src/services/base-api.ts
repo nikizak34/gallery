@@ -49,6 +49,7 @@ export const {
 
 export type PaintingDataType = {
   data: PaintingType[];
+  isLoading: boolean;
 };
 export type PaintingType = {
   authorId: number;

@@ -1,5 +1,5 @@
 import React, { ChangeEvent, useState } from "react";
-import { Pagination, Select } from "fwt-internship-uikit";
+import { Pagination } from "fwt-internship-uikit";
 import { Paintings } from "./components/Paintings/Paintings";
 import s from "./App.module.scss";
 import { ReactComponent as Logo } from "./assets/image/Frame 238.svg";
@@ -52,6 +52,7 @@ function App() {
     setFind(e?.target.value);
     setCurrentPage(1);
   };
+
   // eslint-disable-next-line no-unsafe-optional-chaining
   const pageNumber = Math.ceil(data?.length / 12);
   const onChangeAuthor = (value: string) => {
@@ -92,7 +93,6 @@ function App() {
           }}
         >
           <Logo />
-          {/* eslint-disable-next-line jsx-a11y/click-events-have-key-events,jsx-a11y/no-noninteractive-element-interactions */}
           <Theme onClick={handleThemeClick} className={s.arrowSvg} />
         </div>
         <div
@@ -102,7 +102,7 @@ function App() {
             flexWrap: "wrap",
             gap: "20px",
             marginBottom: "45px",
-            justifyContent: "center",
+            justifyContent: "space-around",
           }}
         >
           <input
@@ -112,14 +112,21 @@ function App() {
             placeholder="Name"
             type="text"
           />
-          <Select
+          {/*  <Select
             onChange={onChangeAuthor}
             isDarkTheme={dark}
             value={titleAuthorValue}
             disabled={false}
             options={authorData}
-          />{" "}
+          /> */}
           <SelectS
+            onClick={setAuthorId}
+            data={authorData}
+            value={titleAuthorValue}
+            onChange={onChangeAuthor}
+          />
+          <SelectS
+            onClick={setLocationId}
             data={locationData}
             value={location}
             onChange={onChangeLocation}

@@ -76,7 +76,7 @@ export const SelectS = forwardRef<ElementRef<typeof Select.Root>, SelectProps>(
             />
           )}
         </Select.Trigger>
-        <Select.Content position="popper" sideOffset={1} className={s.Content}>
+        <Select.Content position="popper" sideOffset={0} className={s.Content}>
           <ScrollArea.Root className={s.ScrollAreaRoot} type="hover">
             <Select.Viewport asChild>
               <ScrollArea.Viewport className={s.ScrollAreaViewport}>

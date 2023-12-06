@@ -8,7 +8,9 @@
   margin: 0 auto;
   padding: 35px 0 97px 0;
 }
-
+input {
+  outline: none;
+}
 .input {
   width: 248px;
   height: 43px;
@@ -17,11 +19,13 @@
   border: 1px solid rgba(0, 0, 0, 0.3);
   background: #fff;
   color: rgba(0, 0, 0, 0.3);
-  font-family: Roboto;
   font-size: 13px;
   font-style: normal;
   font-weight: 400;
   position: relative;
+  &:focus {
+    border: 1px solid #000;
+  }
   @media screen and (max-width: 1157px) {
     width: 215px;
     height: 45px;

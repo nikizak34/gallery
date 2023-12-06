@@ -18,12 +18,14 @@ button {
 .Trigger[data-state="open"] {
   border-radius: 8px 8px 0 0;
   border: 1px solid #000;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.3);
 }
 
 .Content {
   position: absolute;
   z-index: 2;
   border: 1px solid #000;
+  border-top: 0;
   background-color: white;
   width: 266px;
   height: 301px;
@@ -73,5 +75,6 @@ button {
   margin: 0 20px;
   position: absolute;
   right: 15px;
+  top: 9px;
   z-index: 10000;
 }

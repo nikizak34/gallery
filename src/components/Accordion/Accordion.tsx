@@ -1,25 +1,25 @@
-import React, { useState } from "react";
-import s from "./Accordion.module.scss";
+import React, { ChangeEvent } from "react";
+import * as Popover from "@radix-ui/react-popover";
 import ArrowIcon from "../../assets/image/Vector 56.svg";
+import s from "./Accordion.module.scss";
+
+type Props = {
+  valueFromCreated: string;
+  valueBeforeCreated: string;
+  onChange: (value: ChangeEvent<HTMLInputElement>) => void;
+  onChangeBeforeCreated: (value: ChangeEvent<HTMLInputElement>) => void;
+};
 
 export function AccordionComponent({
   valueFromCreated,
   onChange,
   onChangeBeforeCreated,
   valueBeforeCreated,
-}: any) {
-  const [open, setOpen] = useState(false);
+}: Props) {
   return (
-    <div className={s.Root}>
-      {!open ? (
-        // eslint-disable-next-line jsx-a11y/click-events-have-key-events,jsx-a11y/no-static-element-interactions,react/button-has-type
-        <button
-          onClick={() => setOpen(!open)}
-          className={s.AccordionTrigger}
-          onBlur={() => {
-            debugger;
-          }}
-        >
+    <Popover.Root>
+      <Popover.Trigger asChild>
+        <button type="button" className={s.AccordionTrigger}>
           <span className={s.label}>Created</span>
           <img
             src={ArrowIcon}
@@ -28,44 +28,32 @@ export function AccordionComponent({
             aria-hidden
           />
         </button>
-      ) : (
-        <>
-          {/* eslint-disable-next-line jsx-a11y/click-events-have-key-events,jsx-a11y/no-static-element-interactions */}
-          <button
-            type="button"
-            onBlur={() => {
-              setOpen(false);
-            }}
-            onClick={() => setOpen(!open)}
-            className={s.AccordionTriggerOpen}
-          >
-            <span className={s.label}>Created</span>
-            <img
-              src={ArrowIcon}
-              alt=""
-              className={s.AccordionChevron}
-              aria-hidden
-            />
-          </button>
-          <div className={s.AccordionContent}>
-            <input
-              placeholder="from"
-              onChange={onChange}
-              className={s.input}
-              type="number"
-              value={valueFromCreated}
-            />
-            —
-            <input
-              placeholder="before"
-              onChange={onChangeBeforeCreated}
-              className={s.input}
-              type="number"
-              value={valueBeforeCreated}
-            />
-          </div>
-        </>
-      )}
-    </div>
+      </Popover.Trigger>
+      <Popover.Portal>
+        <Popover.Content
+          onOpenAutoFocus={(e) => {
+            e.preventDefault();
+          }}
+          className={s.AccordionContent}
+          sideOffset={0}
+        >
+          <input
+            placeholder="from"
+            onChange={onChange}
+            className={s.input}
+            type="number"
+            value={valueFromCreated}
+          />
+          —
+          <input
+            placeholder="before"
+            onChange={onChangeBeforeCreated}
+            className={s.input}
+            type="number"
+            value={valueBeforeCreated}
+          />
+        </Popover.Content>
+      </Popover.Portal>
+    </Popover.Root>
   );
 }

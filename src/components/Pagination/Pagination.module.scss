@@ -1,0 +1,56 @@
+.paginator {
+  .page {
+    width: 39px;
+    height: 39px;
+    border: 1px solid #000;
+    border-right: 0;
+    background: #fff;
+    text-align: center;
+    cursor: pointer;
+    color: #000;
+    font-weight: 500;
+    text-transform: uppercase;
+
+    &:nth-last-child(1) {
+      border-right: 1px solid #000;
+      border-radius: 0 20% 20% 0;
+    }
+
+    &:nth-child(1) {
+      border-radius: 20% 0 0 20%;
+    }
+
+    &:not(.pageActive):hover {
+      background-color: #ededed;
+    }
+  }
+
+  .pageActive {
+    @extend .page;
+    background-color: black;
+    color: white;
+  }
+
+  .disabled {
+    border: 1px solid rgba(0, 0, 0, 0.3);
+    border-right: 0;
+    background: #fff;
+    pointer-events: none;
+  }
+
+  .disabled:nth-last-child(1) {
+    border-right: 1px solid rgba(0, 0, 0, 0.3);
+  }
+
+  .icon {
+    fill: black;
+  }
+
+  .iconDisabled {
+    cursor: default;
+    fill: rgba(0, 0, 0, 0.3);
+  }
+  .dark {
+    background: black;
+  }
+}

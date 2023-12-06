@@ -8,10 +8,6 @@ h3 {
   all: unset;
 }
 
-.Root {
-  cursor: pointer;
-}
-
 .AccordionChevron {
   transition: transform 300ms cubic-bezier(0.87, 0, 0.13, 1);
   margin-right: 18px;
@@ -27,6 +23,7 @@ h3 {
   background: #fff;
   width: 265px;
   height: 45px;
+  cursor: pointer;
 }
 
 .AccordionTrigger[data-state="open"] {
@@ -40,6 +37,7 @@ h3 {
 
 .AccordionContent {
   position: absolute;
+  left: -133.3px;
   z-index: 1000;
   width: 265px;
   height: 85px;
@@ -50,20 +48,7 @@ h3 {
   border: 1px solid rgba(0, 0, 0, 0.3);
   border-top: none;
   border-radius: 0 0 8px 8px;
-}
-
-.AccordionContent[data-state="open"] {
-  animation: slideDown 300ms cubic-bezier(0.87, 0, 0.13, 1);
-  border-top: none;
-}
-
-@keyframes slideDown {
-  from {
-    height: 0;
-  }
-  to {
-    height: var(--radix-accordion-content-height);
-  }
+  cursor: pointer;
 }
 
 .input {
@@ -91,14 +76,4 @@ input::placeholder {
 
 .label {
   margin-left: 15px;
-}
-
-.AccordionTriggerOpen {
-  @extend .AccordionTrigger;
-  border-bottom: none;
-  border-radius: 6px 6px 0 0;
-}
-
-.AccordionTriggerOpen > .AccordionChevron {
-  transform: rotate(180deg);
 }

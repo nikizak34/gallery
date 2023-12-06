@@ -1,5 +1,4 @@
 import React, { ChangeEvent, useState } from "react";
-import { Pagination } from "fwt-internship-uikit";
 import { Paintings } from "./components/Paintings/Paintings";
 import s from "./App.module.scss";
 import { ReactComponent as Logo } from "./assets/image/Frame 238.svg";
@@ -17,9 +16,11 @@ import { useDebounce } from "./hooks/useDebounce";
 import { useTheme } from "./hooks/useTheme";
 import { SelectS } from "./components/Select/Select";
 import { AccordionComponent } from "./components/Accordion/Accordion";
+import { Pagination } from "./components/Pagination/Pagination";
 
+const ROWS_PER_PAGE = 12;
 function App() {
-  const { theme, setTheme } = useTheme();
+  const { setTheme } = useTheme();
   const [currentPage, setCurrentPage] = useState(1);
   const [find, setFind] = useState("");
   const search = useDebounce(find, 1000);
@@ -54,7 +55,7 @@ function App() {
   };
 
   // eslint-disable-next-line no-unsafe-optional-chaining
-  const pageNumber = Math.ceil(data?.length / 12);
+  const pageNumber = Math.ceil(data?.length / ROWS_PER_PAGE);
   const onChangeAuthor = (value: string) => {
     setTitleAuthorValue(value);
     setAuthorId(
@@ -79,7 +80,7 @@ function App() {
   const handleThemeClick = () => {
     setTheme((curr) => (curr === "light" ? "dark" : "light"));
   };
-  const dark = theme === "dark";
+  /* const dark = theme === "dark"; */
   return (
     <div className={s.App}>
       <div>
@@ -112,13 +113,6 @@ function App() {
             placeholder="Name"
             type="text"
           />
-          {/*  <Select
-            onChange={onChangeAuthor}
-            isDarkTheme={dark}
-            value={titleAuthorValue}
-            disabled={false}
-            options={authorData}
-          /> */}
           <SelectS
             onClick={setAuthorId}
             data={authorData}
@@ -146,10 +140,9 @@ function App() {
         <div className={s.pag}>
           {data?.length > 12 && (
             <Pagination
-              isDarkTheme={dark}
               currentPage={currentPage}
               onChange={setCurrentPage}
-              pagesAmount={pageNumber}
+              pageNumber={pageNumber}
             />
           )}
         </div>

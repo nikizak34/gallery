@@ -49,7 +49,7 @@ export function Pagination({
     ? `${Styles.icon} ${Styles.iconDisabled}`
     : Styles.icon;
   const dark = false;
-  const mapped = pages.map((el, index) => (
+  const mappedPage = pages.map((el, index) => (
     <button
       type="button"
       key={index}
@@ -85,7 +85,7 @@ export function Pagination({
       >
         <ArrayL className={arrayL} />
       </button>
-      {mapped}
+      {mappedPage}
       <button
         className={buttonRight}
         type="button"
@@ -94,8 +94,13 @@ export function Pagination({
       >
         <ArrowR className={arrayR} />
       </button>
-      <button className={buttonRight} type="button" disabled={disable.right}>
-        <ArrayDoubleR onClick={handleLastPageClick} className={arrayR} />
+      <button
+        onClick={handleLastPageClick}
+        className={buttonRight}
+        type="button"
+        disabled={disable.right}
+      >
+        <ArrayDoubleR className={arrayR} />
       </button>
     </div>
   );

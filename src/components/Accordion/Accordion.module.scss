@@ -8,11 +8,6 @@ h3 {
   all: unset;
 }
 
-.AccordionChevron {
-  transition: transform 300ms cubic-bezier(0.87, 0, 0.13, 1);
-  margin-right: 18px;
-}
-
 .AccordionTrigger {
   position: relative;
   display: flex;
@@ -24,22 +19,28 @@ h3 {
   width: 265px;
   height: 45px;
   cursor: pointer;
-}
 
-.AccordionTrigger[data-state="open"] {
-  border-bottom: none;
-  border-radius: 6px 6px 0 0;
-}
+  .label {
+    margin-left: 15px;
+  }
 
-.AccordionTrigger[data-state="open"] > .AccordionChevron {
-  transform: rotate(180deg);
+  .AccordionChevron {
+    transition: transform 300ms cubic-bezier(0.87, 0, 0.13, 1);
+    margin-right: 18px;
+  }
+
+  &[data-state="open"] {
+    border-bottom: none;
+    border-radius: 6px 6px 0 0;
+  }
+
+  &[data-state="open"] > .AccordionChevron {
+    transform: rotate(180deg);
+  }
 }
 
 .AccordionContent {
-  position: absolute;
-  left: -133.3px;
-  z-index: 1000;
-  width: 265px;
+  width: 265.5px;
   height: 85px;
   overflow: hidden;
   font-size: 15px;
@@ -49,31 +50,32 @@ h3 {
   border-top: none;
   border-radius: 0 0 8px 8px;
   cursor: pointer;
-}
 
-.input {
-  width: 95px;
-  height: 45px;
-  border-radius: 8px;
-  background: #efefef;
-  border: none;
-  margin-left: 10px;
-  margin-top: 22px;
-  margin-right: 9px;
-}
+  .inputBlock {
+    display: flex;
+    justify-content: center;
 
-input::-webkit-outer-spin-button,
-input::-webkit-inner-spin-button {
-  -webkit-appearance: none;
-  margin: 0;
-}
+    .input {
+      width: 95px;
+      height: 45px;
+      border-radius: 8px;
+      background: #efefef;
+      border: none;
+      margin-left: 10px;
+      margin-top: 22px;
+      margin-right: 9px;
 
-input::placeholder {
-  padding-left: 15px;
-  color: rgba(0, 0, 0, 0.3);
-  font-size: 13px;
-}
+      &::-webkit-outer-spin-button,
+      &::-webkit-inner-spin-button {
+        -webkit-appearance: none;
+        margin: 0;
+      }
 
-.label {
-  margin-left: 15px;
+      &::placeholder {
+        padding-left: 15px;
+        color: rgba(0, 0, 0, 0.3);
+        font-size: 13px;
+      }
+    }
+  }
 }

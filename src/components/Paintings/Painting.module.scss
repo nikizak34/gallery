@@ -1,52 +1,74 @@
+@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@300;500;700&display=swap");
+
 .painting {
   position: relative;
   margin: 10px;
   display: flex;
   flex-direction: column;
-}
 
-.paintingImage {
-  width: 360px;
-  height: 275px;
-  background-color: #ededed;
-  cursor: pointer;
-  border-radius: 22px 22px 22px 22px;
-  @media screen and (max-width: 1157px) {
-    width: 300px;
-    height: 230px;
+  .paintingImage {
+    width: 360px;
+    height: 275px;
+    background-color: #ededed;
+    cursor: pointer;
+    border-radius: 22px 22px 22px 22px;
+    @media screen and (max-width: 1157px) {
+      width: 300px;
+      height: 230px;
+    }
+    @media screen and (max-width: 768px) {
+      width: 340px;
+      height: 249px;
+    }
+    @media screen and (max-width: 736px) {
+      width: 300px;
+      height: 230px;
+    }
+    @media screen and (max-width: 320px) {
+      width: 280px;
+      height: 205px;
+    }
   }
-  @media screen and (max-width: 768px) {
-    width: 340px;
-    height: 249px;
-  }
-  @media screen and (max-width: 736px) {
-    width: 300px;
-    height: 230px;
-  }
-  @media screen and (max-width: 320px) {
-    width: 280px;
-    height: 205px;
-  }
-}
 
-.name {
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  background-color: rgba(255, 255, 255, 0.75);
-  width: 100%;
-  height: 30px;
-  font-family: Roboto;
-  font-size: 18px;
-  font-style: normal;
-  font-weight: 700;
-  text-transform: capitalize;
-  transition: 0.4s;
-  border-radius: 0 0 22px 22px;
-}
+  .name {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    background-color: rgba(255, 255, 255, 0.75);
+    width: 100%;
+    height: 30px;
+    font-family: Roboto, sans-serif;
+    font-size: 18px;
+    font-weight: 700;
+    text-transform: capitalize;
+    transition: 0.4s;
+    border-radius: 0 0 22px 22px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
 
-.nameBlog {
-  @extend .name;
-  height: 52%;
-  cursor: pointer;
+  .nameBlog {
+    @extend .name;
+    height: 52%;
+    cursor: pointer;
+
+    .author:not(:nth-child(4)) {
+      font-size: 13px;
+      font-weight: 500;
+      margin-bottom: 5px;
+      color: #000;
+    }
+
+    .author:nth-child(1) {
+      margin-top: 6px;
+    }
+
+    .authorName {
+      color: #000;
+      font-size: 13px;
+      font-weight: 300;
+      line-height: 18px;
+    }
+  }
 }

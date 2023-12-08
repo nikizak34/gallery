@@ -1,8 +1,8 @@
 import React, { ChangeEvent, useState } from "react";
 import { Paintings } from "./components/Paintings/Paintings";
 import s from "./App.module.scss";
-import { ReactComponent as Logo } from "./assets/image/Frame 238.svg";
-import { ReactComponent as Theme } from "./assets/image/Frame 237.svg";
+import { ReactComponent as LogoIcon } from "./assets/image/Frame 238.svg";
+import { ReactComponent as ThemeIcon } from "./assets/image/Frame 237.svg";
 import {
   AuthorsDataType,
   LocationDataType,
@@ -14,8 +14,8 @@ import {
 } from "./services/base-api";
 import { useDebounce } from "./hooks/useDebounce";
 import { useTheme } from "./hooks/useTheme";
-import { SelectS } from "./components/Select/Select";
-import { AccordionComponent } from "./components/Accordion/Accordion";
+import { SelectComponent } from "./components/Select/Select";
+import { Accordion } from "./components/Accordion/Accordion";
 import { Pagination } from "./components/Pagination/Pagination";
 
 const ROWS_PER_PAGE = 12;
@@ -54,7 +54,6 @@ function App() {
     setCurrentPage(1);
   };
 
-  // eslint-disable-next-line no-unsafe-optional-chaining
   const pageNumber = Math.ceil(data?.length / ROWS_PER_PAGE);
   const onChangeAuthor = (value: string) => {
     setTitleAuthorValue(value);
@@ -77,6 +76,12 @@ function App() {
     );
     setCurrentPage(1);
   };
+  const onChangeFromCreated = (e: ChangeEvent<HTMLInputElement>) => {
+    setFromCreated(e.currentTarget.value);
+  };
+  const onChangeBeforeCreated = (e: ChangeEvent<HTMLInputElement>) => {
+    setBeforeCreated(e.currentTarget.value);
+  };
   const handleThemeClick = () => {
     setTheme((curr) => (curr === "light" ? "dark" : "light"));
   };
@@ -93,8 +98,8 @@ function App() {
             marginBottom: "60px",
           }}
         >
-          <Logo />
-          <Theme onClick={handleThemeClick} className={s.arrowSvg} />
+          <LogoIcon />
+          <ThemeIcon onClick={handleThemeClick} className={s.arrowSvg} />
         </div>
         <div
           style={{
@@ -113,27 +118,23 @@ function App() {
             placeholder="Name"
             type="text"
           />
-          <SelectS
+          <SelectComponent
             onClick={setAuthorId}
             data={authorData}
             value={titleAuthorValue}
             onChange={onChangeAuthor}
           />
-          <SelectS
+          <SelectComponent
             onClick={setLocationId}
             data={locationData}
             value={location}
             onChange={onChangeLocation}
           />
-          <AccordionComponent
+          <Accordion
             valueFromCreated={fromCreated}
-            onChange={(e: ChangeEvent<HTMLInputElement>) =>
-              setFromCreated(e.currentTarget.value)
-            }
+            onChange={onChangeFromCreated}
             valueBeforeCreated={beforeCreated}
-            onChangeBeforeCreated={(e: ChangeEvent<HTMLInputElement>) =>
-              setBeforeCreated(e.currentTarget.value)
-            }
+            onChangeBeforeCreated={onChangeBeforeCreated}
           />
         </div>
         <Paintings paintingData={paintingData} />

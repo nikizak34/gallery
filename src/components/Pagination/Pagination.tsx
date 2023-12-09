@@ -6,6 +6,7 @@ import { ReactComponent as ArrayDoubleR } from "../../assets/image/ArrayDoubleR.
 import { ReactComponent as ArrayDoubleL } from "../../assets/image/ArrayDoubleL.svg";
 import { ReactComponent as ArrayL } from "../../assets/image/ArrayL.svg";
 import { createPages } from "../../utils/create-pages";
+import { Page } from "./Page/Page";
 
 type PaginationProps = {
   onChange: (currentPage: number) => void;
@@ -40,41 +41,26 @@ export function Pagination({
     onChange(pageNumber);
   };
 
-  const buttonLeft = disable.left
-    ? `${Styles.page} ${Styles.disabled}`
-    : Styles.page;
-  const buttonRight = disable.right
-    ? `${Styles.page} ${Styles.disabled}`
-    : Styles.page;
-  const arrayL = disable.left
-    ? `${Styles.icon} ${Styles.iconDisabled}`
-    : Styles.icon;
-  const arrayR = disable.right
-    ? `${Styles.icon} ${Styles.iconDisabled}`
-    : Styles.icon;
-  const mappedPage = pages.map((el, index) => (
-    <button
-      type="button"
-      key={index}
-      onClick={() => onChange(el)}
-      /*    currentPage === el
-          ? Styles.pageActive
-: isDark
-        ? `${Styles.page} ${Styles.dark}`
-        : Styles.page */
-      className={clsx(
-        Styles.page,
-        currentPage === el && Styles.pageActive,
-        currentPage === el &&
-          isDark &&
-          Styles.pageActive &&
-          Styles.darkActivePage,
-        isDark && Styles.dark,
-      )}
-    >
-      {el}
-    </button>
-  ));
+  const buttonLeft = clsx(
+    Styles.page,
+    disable.left && Styles.disabled,
+    isDark && Styles.dark,
+  );
+  const buttonRight = clsx(
+    Styles.page,
+    disable.right && Styles.disabled,
+    isDark && Styles.dark,
+  );
+  const arrayL = clsx(
+    Styles.icon,
+    disable.left && Styles.iconDisabled,
+    isDark && Styles.darkIcon,
+  );
+  const arrayR = clsx(
+    Styles.icon,
+    disable.right && Styles.iconDisabled,
+    isDark && Styles.darkIcon,
+  );
 
   return (
     <div className={Styles.paginator}>
@@ -94,7 +80,15 @@ export function Pagination({
       >
         <ArrayL className={arrayL} />
       </button>
-      {mappedPage}
+      {pages.map((el, index) => (
+        <Page
+          key={index}
+          page={el}
+          onChange={onChange}
+          currentPage={currentPage}
+          isDark={isDark}
+        />
+      ))}
       <button
         className={buttonRight}
         type="button"

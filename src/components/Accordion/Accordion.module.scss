@@ -14,8 +14,8 @@ h3 {
   align-items: center;
   justify-content: space-between;
   border-radius: 8px;
-  border: 1px solid rgba(0, 0, 0, 0.3);
-  background: #fff;
+  border: var(--border);
+  background: var(--background-color);
   width: 265px;
   height: 45px;
   cursor: pointer;
@@ -34,6 +34,7 @@ h3 {
 
   .label {
     margin-left: 15px;
+    color: var(--text);
   }
 
   .AccordionChevron {
@@ -52,13 +53,12 @@ h3 {
 }
 
 .AccordionContent {
-  width: 265.5px;
+  width: 265px;
   height: 85px;
   overflow: hidden;
   font-size: 15px;
-  color: var(--mauve-11);
-  background-color: white;
-  border: 1px solid rgba(0, 0, 0, 0.3);
+  background: var(--background-color);
+  border: var(--border);
   border-top: none;
   border-radius: 0 0 8px 8px;
   cursor: pointer;
@@ -93,7 +93,7 @@ h3 {
 }
 .dash {
   margin-top: 42px;
-  background-color: black;
+  background-color: var(--text);
   width: 12px;
   height: 1px;
 }

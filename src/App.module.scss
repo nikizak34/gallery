@@ -16,15 +16,16 @@ input {
   height: 43px;
   padding-left: 15px;
   border-radius: 8px;
-  border: 1px solid rgba(0, 0, 0, 0.3);
-  background: #fff;
-  color: rgba(0, 0, 0, 0.3);
+  border: var(--border);
+  background: var(--background-color);
+  color: var(--text);
   font-size: 13px;
   font-style: normal;
   font-weight: 400;
   position: relative;
+
   &:focus {
-    border: 1px solid #000;
+    border: var(--border);
   }
   /*  @media screen and (max-width: 1157px) {
     width: 215px;

@@ -15,8 +15,8 @@ button {
   width: 265px;
   height: 45px;
   border-radius: 8px;
-  border: 1px solid rgba(0, 0, 0, 0.3);
-  background: #fff;
+  border: var(--border);
+  background: var(--background-color);
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -42,8 +42,8 @@ button {
 
   &[data-state="open"] {
     border-radius: 8px 8px 0 0;
-    border: 1px solid #000;
-    border-bottom: 1px solid rgba(0, 0, 0, 0.3);
+    border: var(--border);
+    border-bottom: 1px solid var(--line);
   }
 
   &[data-state="open"] > .IconArrow {
@@ -51,6 +51,7 @@ button {
   }
 
   .SelectValue {
+    color: var(--text);
     margin-left: 15px;
     padding-right: 10px;
     white-space: nowrap;
@@ -62,9 +63,9 @@ button {
 .Content {
   position: absolute;
   z-index: 2;
-  border: 1px solid #000;
+  border: var(--border);
   border-top: 0;
-  background-color: white;
+  background: var(--background-color);
   width: 266px;
   height: 301px;
   border-radius: 0 0 8px 8px;
@@ -92,11 +93,12 @@ button {
   }
 
   .Item {
+    color: var(--text);
     padding: 12px 10px 12px 10px;
 
     &:hover {
-      background: #000;
-      color: #fff;
+      background: var(--text);
+      color: var(--background-color);
     }
   }
 }

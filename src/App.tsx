@@ -51,7 +51,7 @@ function App() {
     bCreated,
   });
   /* const before = data?.map((el) => +el.created).sort((a, b) => b - a)[0]; */
-
+  const isDark = theme === "dark";
   const onChangeText = (e: ChangeEvent<HTMLInputElement>) => {
     setFind(e?.target.value);
     setCurrentPage(1);
@@ -98,7 +98,6 @@ function App() {
     setTitleAuthorValue("Author");
   };
 
-  const dark = theme === "dark";
   if (isLoading) return <span className="loader" />;
   return (
     <div className={s.App}>
@@ -160,7 +159,7 @@ function App() {
               currentPage={currentPage}
               onChange={setCurrentPage}
               pageNumber={pageNumber}
-              isDark={dark}
+              isDark={isDark}
             />
           )}
         </div>

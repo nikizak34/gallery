@@ -8,26 +8,26 @@ import * as Select from "@radix-ui/react-select";
 import * as ScrollArea from "@radix-ui/react-scroll-area";
 import s from "./Select.module.scss";
 import { ReactComponent as ArrowIconBottom } from "../../assets/image/Vector 56.svg";
-import { ReactComponent as ArrowIconUp } from "../../assets/image/ArrowIconUp.svg";
 import Del from "../../assets/image/Union.svg";
 
 export type SelectProps = {
   value: string;
   onChange: (value: string) => void;
-  data: any;
-  onClick: (value: string) => void;
+  options: any;
+  onClick: () => void;
+  defaultValue: string;
 } & ComponentPropsWithoutRef<typeof Select.Root>;
 
 export const SelectComponent = forwardRef<
   ElementRef<typeof Select.Root>,
   SelectProps
 >((props, ref) => {
-  const { onClick, onChange, value, data } = props;
+  const { onClick, onChange, value, options, defaultValue } = props;
   const [open, setOpen] = useState<boolean>(false);
 
   const DeleteHandler = () => {
     debugger;
-    onClick("");
+    onClick();
   };
   const handlerOpenedMenu = () => {
     setOpen(!open);
@@ -43,24 +43,28 @@ export const SelectComponent = forwardRef<
       onOpenChange={handlerOpenedMenu}
       onValueChange={onValueChangeHandler}
     >
-      <Select.Trigger className={s.Trigger} tabIndex={0} ref={ref}>
-        <div className={s.SelectValue}>{value}</div>
-        {open && (
-          <>
-            <button className={s.IconDel} onClick={DeleteHandler} type="button">
-              <img src={Del} alt="" />
-            </button>
-            <ArrowIconUp className={s.IconArrow} />
-          </>
+      <div style={{ position: "relative" }}>
+        <Select.Trigger className={s.Trigger} tabIndex={0} ref={ref}>
+          <div className={s.SelectValue}>{value}</div>
+          <ArrowIconBottom className={s.IconArrow} />
+        </Select.Trigger>
+        {value !== defaultValue && (
+          <button
+            style={{ position: "absolute" }}
+            className={s.IconDel}
+            onClick={DeleteHandler}
+            type="button"
+          >
+            <img src={Del} alt="" />
+          </button>
         )}
-        {!open && <ArrowIconBottom className={s.IconArrow} />}
-      </Select.Trigger>
+      </div>
       <Select.Content position="popper" sideOffset={0} className={s.Content}>
         <ScrollArea.Root className={s.ScrollAreaRoot} type="hover">
           <Select.Viewport asChild>
             <ScrollArea.Viewport className={s.ScrollAreaViewport}>
               <Select.Group>
-                {data?.map((item: any) => {
+                {options?.map((item: any) => {
                   if (item.location) {
                     return <Item key={item.id}>{item.location}</Item>;
                   }

@@ -20,7 +20,7 @@ import { Pagination } from "./components/Pagination/Pagination";
 
 const ROWS_PER_PAGE = 12;
 function App() {
-  const { setTheme } = useTheme();
+  const { theme, setTheme } = useTheme();
   const [currentPage, setCurrentPage] = useState(1);
   const [find, setFind] = useState("");
   const search = useDebounce(find, 1000);
@@ -30,22 +30,25 @@ function App() {
   const [locationId, setLocationId] = useState("");
   const [fromCreated, setFromCreated] = useState("1");
   const [beforeCreated, setBeforeCreated] = useState("3000");
-  const { data: paintingData } = useGetPaintingQuery<PaintingDataType>({
-    currentPage,
-    search,
-    authorId,
-    locationId,
-    fromCreated,
-    beforeCreated,
-  });
+  const fCreated = useDebounce(fromCreated, 1000);
+  const bCreated = useDebounce(beforeCreated, 1000);
+  const { data: paintingData, isLoading } =
+    useGetPaintingQuery<PaintingDataType>({
+      currentPage,
+      search,
+      authorId,
+      locationId,
+      fCreated,
+      bCreated,
+    });
   const { data: locationData } = useGetLocationQuery<LocationDataType>();
   const { data: authorData } = useGetAuthorsQuery<AuthorsDataType>();
   const { data } = useGetPaintingFullQuery<PaintingDataType>({
     search,
     authorId,
     locationId,
-    fromCreated,
-    beforeCreated,
+    fCreated,
+    bCreated,
   });
   /* const before = data?.map((el) => +el.created).sort((a, b) => b - a)[0]; */
 
@@ -85,7 +88,18 @@ function App() {
   const handleThemeClick = () => {
     setTheme((curr) => (curr === "light" ? "dark" : "light"));
   };
-  /* const dark = theme === "dark"; */
+
+  const removeValueLocation = () => {
+    setLocationId("");
+    setLocation("Location");
+  };
+  const removeValueAuthor = () => {
+    setAuthorId("");
+    setTitleAuthorValue("Author");
+  };
+
+  const dark = theme === "dark";
+  if (isLoading) return <span className="loader" />;
   return (
     <div className={s.App}>
       <div>
@@ -96,6 +110,7 @@ function App() {
             alignItems: "center",
             justifyContent: "space-between",
             marginBottom: "60px",
+            paddingLeft: "5px",
           }}
         >
           <LogoIcon />
@@ -106,7 +121,6 @@ function App() {
             width: "100%",
             display: "flex",
             flexWrap: "wrap",
-            gap: "20px",
             marginBottom: "45px",
             justifyContent: "space-around",
           }}
@@ -119,14 +133,16 @@ function App() {
             type="text"
           />
           <SelectComponent
-            onClick={setAuthorId}
-            data={authorData}
+            defaultValue="Author"
+            onClick={removeValueAuthor}
+            options={authorData}
             value={titleAuthorValue}
             onChange={onChangeAuthor}
           />
           <SelectComponent
-            onClick={setLocationId}
-            data={locationData}
+            defaultValue="Location"
+            onClick={removeValueLocation}
+            options={locationData}
             value={location}
             onChange={onChangeLocation}
           />
@@ -144,6 +160,7 @@ function App() {
               currentPage={currentPage}
               onChange={setCurrentPage}
               pageNumber={pageNumber}
+              isDark={dark}
             />
           )}
         </div>

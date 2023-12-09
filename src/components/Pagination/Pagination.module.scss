@@ -36,10 +36,10 @@
     border-right: 0;
     background: #fff;
     pointer-events: none;
-  }
 
-  .disabled:nth-last-child(1) {
-    border-right: 1px solid rgba(0, 0, 0, 0.3);
+    &:nth-last-child(1) {
+      border-right: 1px solid rgba(0, 0, 0, 0.3);
+    }
   }
 
   .icon {
@@ -50,7 +50,19 @@
     cursor: default;
     fill: rgba(0, 0, 0, 0.3);
   }
+
   .dark {
     background: black;
+    color: white;
+    border: 1px solid #fff;
+
+    &:hover {
+      background: #464646 !important;
+    }
+  }
+  .darkActivePage {
+    background: white;
+    color: black;
+    pointer-events: none;
   }
 }

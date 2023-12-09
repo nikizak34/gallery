@@ -1,4 +1,5 @@
 import React from "react";
+import clsx from "clsx";
 import Styles from "./Pagination.module.scss";
 import { ReactComponent as ArrowR } from "../../assets/image/ArrayR.svg";
 import { ReactComponent as ArrayDoubleR } from "../../assets/image/ArrayDoubleR.svg";
@@ -10,12 +11,14 @@ type PaginationProps = {
   onChange: (currentPage: number) => void;
   currentPage: number;
   pageNumber: number;
+  isDark: boolean;
 };
 
 export function Pagination({
   pageNumber,
   onChange,
   currentPage,
+  isDark,
 }: PaginationProps) {
   const disable = {
     left: currentPage === 1,
@@ -36,6 +39,7 @@ export function Pagination({
   const handleLastPageClick = () => {
     onChange(pageNumber);
   };
+
   const buttonLeft = disable.left
     ? `${Styles.page} ${Styles.disabled}`
     : Styles.page;
@@ -48,20 +52,25 @@ export function Pagination({
   const arrayR = disable.right
     ? `${Styles.icon} ${Styles.iconDisabled}`
     : Styles.icon;
-  const dark = false;
   const mappedPage = pages.map((el, index) => (
     <button
       type="button"
       key={index}
       onClick={() => onChange(el)}
-      className={
-        // eslint-disable-next-line no-nested-ternary
-        currentPage === el
+      /*    currentPage === el
           ? Styles.pageActive
-          : dark
-          ? `${Styles.dark} ${Styles.page}`
-          : Styles.page
-      }
+: isDark
+        ? `${Styles.page} ${Styles.dark}`
+        : Styles.page */
+      className={clsx(
+        Styles.page,
+        currentPage === el && Styles.pageActive,
+        currentPage === el &&
+          isDark &&
+          Styles.pageActive &&
+          Styles.darkActivePage,
+        isDark && Styles.dark,
+      )}
     >
       {el}
     </button>

@@ -41,6 +41,7 @@ export function Accordion({
               type="number"
               value={valueFromCreated}
             />
+            <div className={s.dash} />
             <input
               placeholder="before"
               onChange={onChangeBeforeCreated}

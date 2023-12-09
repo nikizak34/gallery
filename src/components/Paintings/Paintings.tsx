@@ -1,6 +1,6 @@
 import React from "react";
 import { PaintingType } from "../../services/base-api";
-import { Painting } from "./Painting";
+import { Painting } from "./Paintings/Painting";
 
 type Props = {
   paintingData: PaintingType[];
@@ -11,8 +11,9 @@ export function Paintings({ paintingData }: Props) {
     <div
       style={{
         display: "flex",
+        justifyContent: "space-around",
+        alignItems: "center",
         flexWrap: "wrap",
-        justifyContent: "center",
         marginBottom: "40px",
       }}
     >

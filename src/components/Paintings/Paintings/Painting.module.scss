@@ -5,6 +5,7 @@
   margin: 10px;
   display: flex;
   flex-direction: column;
+  flex-wrap: wrap;
 
   .paintingImage {
     width: 360px;
@@ -13,6 +14,10 @@
     cursor: pointer;
     border-radius: 22px 22px 22px 22px;
     @media screen and (max-width: 1157px) {
+      width: 340px;
+      height: 249px;
+    }
+    @media screen and (max-width: 1024px) {
       width: 300px;
       height: 230px;
     }
@@ -23,6 +28,15 @@
     @media screen and (max-width: 736px) {
       width: 300px;
       height: 230px;
+    }
+
+    @media screen and (max-width: 657px) {
+      width: 250px;
+      height: 205px;
+    }
+    @media screen and (max-width: 557px) {
+      width: 340px;
+      height: 249px;
     }
     @media screen and (max-width: 320px) {
       width: 280px;
@@ -36,39 +50,49 @@
     left: 0;
     background-color: rgba(255, 255, 255, 0.75);
     width: 100%;
-    height: 30px;
     font-family: Roboto, sans-serif;
     font-size: 18px;
     font-weight: 700;
     text-transform: capitalize;
-    transition: 0.4s;
     border-radius: 0 0 22px 22px;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
+    padding: 5px 0;
   }
 
-  .nameBlog {
+  .nameBlock {
     @extend .name;
     height: 52%;
     cursor: pointer;
+    padding: 0;
 
-    .author:not(:nth-child(4)) {
-      font-size: 13px;
-      font-weight: 500;
-      margin-bottom: 5px;
-      color: #000;
-    }
+    .nameTextBlock {
+      margin-left: 15px;
+      margin-top: 5px;
 
-    .author:nth-child(1) {
-      margin-top: 6px;
-    }
+      .title:not(:nth-child(4)) {
+        font-size: 13px;
+        font-weight: 500;
+        margin-bottom: 5px;
+        color: #000;
+      }
 
-    .authorName {
-      color: #000;
-      font-size: 13px;
-      font-weight: 300;
-      line-height: 18px;
+      .title:nth-child(1) {
+        margin-top: 6px;
+      }
+
+      .authorName {
+        color: #000;
+        font-size: 13px;
+        font-weight: 300;
+        line-height: 18px;
+      }
     }
   }
+}
+
+.text {
+  padding-left: 15px;
+  padding-top: 10px;
 }

@@ -1,0 +1,23 @@
+{
+  "files": {
+    "main.css": "/gallery/static/css/main.610bfe17.css",
+    "main.js": "/gallery/static/js/main.9ec4984e.js",
+    "static/js/787.d4aba7ab.chunk.js": "/gallery/static/js/787.d4aba7ab.chunk.js",
+    "static/media/Frame 237.svg": "/gallery/static/media/Frame 237.ae11ee3f5617e3f8643f964988f1abc1.svg",
+    "static/media/Frame 238.svg": "/gallery/static/media/Frame 238.46c050be2dda706ad64d4670dc403f0e.svg",
+    "static/media/ArrayDoubleR.svg": "/gallery/static/media/ArrayDoubleR.0b825d8ad7da2fce1dcb61f283837631.svg",
+    "static/media/ArrayDoubleL.svg": "/gallery/static/media/ArrayDoubleL.1d249f013d8db27805b6dae6ea4ee6c1.svg",
+    "static/media/Union.svg": "/gallery/static/media/Union.0440d97fbc08c95fdf6d5843bb2d41ef.svg",
+    "index.html": "/gallery/index.html",
+    "static/media/ArrayL.svg": "/gallery/static/media/ArrayL.5d87ae81c2924c7635dcce8936102562.svg",
+    "static/media/ArrayR.svg": "/gallery/static/media/ArrayR.942a3b0b6bc6860dde5113fd01427ea6.svg",
+    "static/media/Vector 56.svg": "/gallery/static/media/Vector 56.e43daa80784ff0c5e3b1482e7095265d.svg",
+    "main.610bfe17.css.map": "/gallery/static/css/main.610bfe17.css.map",
+    "main.9ec4984e.js.map": "/gallery/static/js/main.9ec4984e.js.map",
+    "787.d4aba7ab.chunk.js.map": "/gallery/static/js/787.d4aba7ab.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.610bfe17.css",
+    "static/js/main.9ec4984e.js"
+  ]
+}

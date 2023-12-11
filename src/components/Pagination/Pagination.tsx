@@ -9,17 +9,15 @@ import { createPages } from "../../utils/create-pages";
 import { Page } from "./Page/Page";
 
 type PaginationProps = {
-  onChange: (currentPage: number) => void;
+  onChange: (value: any) => void;
   currentPage: number;
   pageNumber: number;
-  isDark: boolean;
 };
 
 export function Pagination({
   pageNumber,
   onChange,
   currentPage,
-  isDark,
 }: PaginationProps) {
   const disable = {
     left: currentPage === 1,
@@ -41,26 +39,10 @@ export function Pagination({
     onChange(pageNumber);
   };
 
-  const buttonLeft = clsx(
-    Styles.page,
-    disable.left && Styles.disabled,
-    isDark && Styles.dark,
-  );
-  const buttonRight = clsx(
-    Styles.page,
-    disable.right && Styles.disabled,
-    isDark && Styles.dark,
-  );
-  const arrayL = clsx(
-    Styles.icon,
-    disable.left && Styles.iconDisabled,
-    isDark && Styles.darkIcon,
-  );
-  const arrayR = clsx(
-    Styles.icon,
-    disable.right && Styles.iconDisabled,
-    isDark && Styles.darkIcon,
-  );
+  const buttonLeft = clsx(Styles.page, disable.left && Styles.disabled);
+  const buttonRight = clsx(Styles.page, disable.right && Styles.disabled);
+  const arrayL = clsx(Styles.icon, disable.left && Styles.iconDisabled);
+  const arrayR = clsx(Styles.icon, disable.right && Styles.iconDisabled);
 
   return (
     <div className={Styles.paginator}>
@@ -86,7 +68,6 @@ export function Pagination({
           page={el}
           onChange={onChange}
           currentPage={currentPage}
-          isDark={isDark}
         />
       ))}
       <button

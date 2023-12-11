@@ -2,17 +2,17 @@
   .page {
     width: 39px;
     height: 39px;
-    border: 1px solid #000;
+    border: 1px solid var(--text);
     border-right: 0;
-    background: #fff;
+    background: var(--background-color);
     text-align: center;
     cursor: pointer;
-    color: #000;
+    color: var(--text);
     font-weight: 500;
     text-transform: uppercase;
 
     &:nth-last-child(1) {
-      border-right: 1px solid #000;
+      border-right: 1px solid var(--text);
       border-radius: 0 20% 20% 0;
     }
 
@@ -21,51 +21,33 @@
     }
 
     &:not(.pageActive):hover {
-      background-color: #ededed;
+      background: var(--hoverPage);
     }
   }
 
   .pageActive {
     @extend .page;
-    background-color: black;
-    color: white;
+    background: var(--text);
+    color: var(--background-color);
   }
 
   .disabled {
-    border: 1px solid rgba(0, 0, 0, 0.3);
+    border: var(--borderDisabled);
     border-right: 0;
-    background: #fff;
+    background: var(--background-color);
     pointer-events: none;
 
     &:nth-last-child(1) {
-      border-right: 1px solid rgba(0, 0, 0, 0.3);
+      border-right: var(--borderDisabled);
     }
   }
 
   .icon {
-    fill: black;
+    fill: var(--text);
   }
 
   .iconDisabled {
     cursor: default;
-    fill: rgba(0, 0, 0, 0.3);
-  }
-
-  .dark {
-    background: black;
-    color: white;
-    border: 1px solid #fff;
-
-    &:hover {
-      background: #464646 !important;
-    }
-  }
-  .darkActivePage {
-    background: white;
-    color: black;
-    pointer-events: none;
-  }
-  .darkIcon {
-    fill: white;
+    fill: var(--line);
   }
 }

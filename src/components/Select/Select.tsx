@@ -26,7 +26,6 @@ export const SelectComponent = forwardRef<
   const [open, setOpen] = useState<boolean>(false);
 
   const DeleteHandler = () => {
-    debugger;
     onClick();
   };
   const handlerOpenedMenu = () => {
@@ -43,18 +42,13 @@ export const SelectComponent = forwardRef<
       onOpenChange={handlerOpenedMenu}
       onValueChange={onValueChangeHandler}
     >
-      <div style={{ position: "relative" }}>
+      <div className={s.Main}>
         <Select.Trigger className={s.Trigger} tabIndex={0} ref={ref}>
           <div className={s.SelectValue}>{value}</div>
           <ArrowIconBottom className={s.IconArrow} />
         </Select.Trigger>
         {value !== defaultValue && (
-          <button
-            style={{ position: "absolute" }}
-            className={s.IconDel}
-            onClick={DeleteHandler}
-            type="button"
-          >
+          <button className={s.IconDel} onClick={DeleteHandler} type="button">
             <img src={Del} alt="" />
           </button>
         )}

@@ -2,61 +2,73 @@ button {
   all: unset;
 }
 
-.IconDel {
-  margin: 0 20px;
-  position: absolute;
-  right: 17px;
-  top: 10px;
-  cursor: pointer;
-  z-index: 100;
-}
-
-.Trigger {
-  width: 265px;
-  height: 45px;
-  border-radius: 8px;
-  border: var(--border);
-  background: var(--background-color);
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
+.Main {
   position: relative;
-  cursor: pointer;
-  @media screen and (max-width: 1024px) {
-    width: 220px;
-    height: 45px;
-  }
-  @media screen and (max-width: 768px) {
-    width: 160px;
-    height: 45px;
-  }
-  @media screen and (max-width: 320px) {
-    width: 280px;
-    height: 45px;
+
+  .IconDel {
+    margin: 0 20px;
+    position: absolute;
+    right: 17px;
+    top: 10px;
+    cursor: pointer;
+    z-index: 100;
   }
 
-  .IconArrow {
-    transition: transform 300ms cubic-bezier(0.87, 0, 0.13, 1);
-    margin-right: 15px;
-  }
-
-  &[data-state="open"] {
-    border-radius: 8px 8px 0 0;
+  .Trigger {
+    width: 265px;
+    height: 45px;
+    border-radius: 8px;
     border: var(--border);
-    border-bottom: 1px solid var(--line);
-  }
+    background: var(--background-color);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    position: relative;
+    cursor: pointer;
 
-  &[data-state="open"] > .IconArrow {
-    transform: rotate(180deg);
-  }
+    @media screen and (max-width: 1101px) {
+      width: 220px;
+    }
+    @media screen and (max-width: 1001px) {
+      width: 200px;
+    }
+    @media screen and (max-width: 877px) {
+      width: 160px;
+    }
+    @media screen and (max-width: 698px) {
+      width: 280px;
+    }
+    @media screen and (max-width: 617px) {
+      width: 320px;
+    }
+    @media screen and (max-width: 380px) {
+      width: 276px;
+    }
 
-  .SelectValue {
-    color: var(--text);
-    margin-left: 15px;
-    padding-right: 10px;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
+    .IconArrow {
+      fill: var(--line);
+      transition: transform 300ms cubic-bezier(0.87, 0, 0.13, 1);
+      margin-right: 15px;
+    }
+
+    &[data-state="open"] {
+      border-radius: 8px 8px 0 0;
+      border: var(--border);
+      border-bottom: 1px solid var(--line);
+    }
+
+    &[data-state="open"] > .IconArrow {
+      transform: rotate(180deg);
+    }
+
+    .SelectValue {
+      color: var(--text);
+      margin-left: 15px;
+      padding-right: 10px;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
   }
 }
 
@@ -66,10 +78,13 @@ button {
   border: var(--border);
   border-top: 0;
   background: var(--background-color);
-  width: 266px;
-  height: 301px;
+  height: 345px;
+  width: var(--radix-select-trigger-width);
   border-radius: 0 0 8px 8px;
   cursor: pointer;
+  @media screen and (max-width: 1024px) {
+    height: 400px;
+  }
 
   .ScrollAreaRoot {
     width: 100%;

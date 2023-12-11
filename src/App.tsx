@@ -1,4 +1,4 @@
-import React, { ChangeEvent, useState } from "react";
+import React, { ChangeEvent } from "react";
 import { Paintings } from "./components/Paintings/Paintings";
 import s from "./App.module.scss";
 import { ReactComponent as LogoIcon } from "./assets/image/Frame 238.svg";
@@ -17,21 +17,48 @@ import { useTheme } from "./hooks/useTheme";
 import { SelectComponent } from "./components/Select/Select";
 import { Accordion } from "./components/Accordion/Accordion";
 import { Pagination } from "./components/Pagination/Pagination";
+import { useAppDispatch, useAppSelector } from "./services/store";
+import {
+  changeAuthorId,
+  changeAuthorValue,
+  changeBeforeCreated,
+  changeCurrentPage,
+  changeFind,
+  changeFromCreated,
+  changeLocationId,
+  changeLocationValue,
+} from "./services/Painting.reducer";
+import { Loader } from "./components/Loader/Loader";
 
 const ROWS_PER_PAGE = 12;
+
 function App() {
-  const { theme, setTheme } = useTheme();
-  const [currentPage, setCurrentPage] = useState(1);
-  const [find, setFind] = useState("");
+  const dispatch = useAppDispatch();
+  const currentPage = useAppSelector<number>(
+    (state) => state.painting.currentPage,
+  );
+  const find = useAppSelector<string>((state) => state.painting.find);
+  const authorValue = useAppSelector<string>(
+    (state) => state.painting.authorValue,
+  );
+  const location = useAppSelector<string>((state) => state.painting.location);
+  const authorId = useAppSelector<string>((state) => state.painting.authorId);
+  const locationId = useAppSelector<string>(
+    (state) => state.painting.locationId,
+  );
+  const fromCreated = useAppSelector<string>(
+    (state) => state.painting.fromCreated,
+  );
+  const beforeCreated = useAppSelector<string>(
+    (state) => state.painting.beforeCreated,
+  );
+
   const search = useDebounce(find, 1000);
-  const [titleAuthorValue, setTitleAuthorValue] = useState("Author");
-  const [location, setLocation] = useState("Location");
-  const [authorId, setAuthorId] = useState("");
-  const [locationId, setLocationId] = useState("");
-  const [fromCreated, setFromCreated] = useState("1");
-  const [beforeCreated, setBeforeCreated] = useState("3000");
   const fCreated = useDebounce(fromCreated, 1000);
   const bCreated = useDebounce(beforeCreated, 1000);
+
+  const { setTheme } = useTheme();
+
   const { data: paintingData, isLoading } =
     useGetPaintingQuery<PaintingDataType>({
       currentPage,
@@ -50,80 +77,64 @@ function App() {
     fCreated,
     bCreated,
   });
-  /* const before = data?.map((el) => +el.created).sort((a, b) => b - a)[0]; */
-  const isDark = theme === "dark";
+
   const onChangeText = (e: ChangeEvent<HTMLInputElement>) => {
-    setFind(e?.target.value);
-    setCurrentPage(1);
+    dispatch(changeFind({ find: e?.target.value }));
+    dispatch(changeCurrentPage({ currentPage: 1 }));
   };
 
-  const pageNumber = Math.ceil(data?.length / ROWS_PER_PAGE);
   const onChangeAuthor = (value: string) => {
-    setTitleAuthorValue(value);
-    setAuthorId(
-      authorData
-        ?.filter((el) => el.name === value)
-        .map((el) => el.id)
-        .join(""),
-    );
-    setCurrentPage(1);
+    const id = authorData
+      ?.filter((el) => el.name === value)
+      .map((el) => el.id)
+      .join("");
+    dispatch(changeAuthorId({ authorId: id }));
+    dispatch(changeAuthorValue({ authorValue: value }));
+    dispatch(changeCurrentPage({ currentPage: 1 }));
   };
 
   const onChangeLocation = (value: string) => {
-    setLocation(value);
-    setLocationId(
-      locationData
-        ?.filter((el) => el.location === value)
-        .map((el) => el.id)
-        .join(""),
-    );
-    setCurrentPage(1);
+    const id = locationData
+      ?.filter((el) => el.location === value)
+      .map((el) => el.id)
+      .join("");
+    dispatch(changeLocationId({ locationId: id }));
+    dispatch(changeLocationValue({ location: value }));
+    dispatch(changeCurrentPage({ currentPage: 1 }));
   };
   const onChangeFromCreated = (e: ChangeEvent<HTMLInputElement>) => {
-    setFromCreated(e.currentTarget.value);
+    dispatch(changeFromCreated({ fromCreated: e.currentTarget.value }));
   };
   const onChangeBeforeCreated = (e: ChangeEvent<HTMLInputElement>) => {
-    setBeforeCreated(e.currentTarget.value);
+    dispatch(changeBeforeCreated({ beforeCreated: e.currentTarget.value }));
   };
   const handleThemeClick = () => {
     setTheme((curr) => (curr === "light" ? "dark" : "light"));
   };
 
   const removeValueLocation = () => {
-    setLocationId("");
-    setLocation("Location");
+    dispatch(changeLocationId({ locationId: "" }));
+    dispatch(changeLocationValue({ location: "Location" }));
   };
   const removeValueAuthor = () => {
-    setAuthorId("");
-    setTitleAuthorValue("Author");
+    dispatch(changeAuthorId({ authorId: "" }));
+    dispatch(changeAuthorValue({ authorValue: "Author" }));
   };
 
-  if (isLoading) return <span className="loader" />;
+  const pageNumber = Math.ceil(data?.length / ROWS_PER_PAGE);
+  const onChangePagination = (value: number) => {
+    dispatch(changeCurrentPage({ currentPage: value }));
+  };
+
+  if (isLoading) return <Loader />;
   return (
     <div className={s.App}>
       <div>
-        <div
-          style={{
-            minWidth: "100%",
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "space-between",
-            marginBottom: "60px",
-            paddingLeft: "5px",
-          }}
-        >
-          <LogoIcon />
+        <div className={s.IconBlock}>
+          <LogoIcon className={s.logo} />
           <ThemeIcon onClick={handleThemeClick} className={s.arrowSvg} />
         </div>
-        <div
-          style={{
-            width: "100%",
-            display: "flex",
-            flexWrap: "wrap",
-            marginBottom: "45px",
-            justifyContent: "space-around",
-          }}
-        >
+        <div className={s.filtrationBlock}>
           <input
             value={find}
             onChange={onChangeText}
@@ -135,7 +146,7 @@ function App() {
             defaultValue="Author"
             onClick={removeValueAuthor}
             options={authorData}
-            value={titleAuthorValue}
+            value={authorValue}
             onChange={onChangeAuthor}
           />
           <SelectComponent
@@ -153,13 +164,12 @@ function App() {
           />
         </div>
         <Paintings paintingData={paintingData} />
-        <div className={s.pag}>
+        <div className={s.paginator}>
           {data?.length > 12 && (
             <Pagination
               currentPage={currentPage}
-              onChange={setCurrentPage}
+              onChange={onChangePagination}
               pageNumber={pageNumber}
-              isDark={isDark}
             />
           )}
         </div>

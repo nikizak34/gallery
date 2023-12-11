@@ -1,5 +1,13 @@
 @import url("https://fonts.googleapis.com/css2?family=Roboto:wght@300;500;700&display=swap");
 
+.paintings {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  flex-wrap: wrap;
+  margin-bottom: 40px;
+}
+
 .painting {
   position: relative;
   margin: 10px;
@@ -13,32 +21,34 @@
     background-color: #ededed;
     cursor: pointer;
     border-radius: 22px 22px 22px 22px;
+
     @media screen and (max-width: 1157px) {
       width: 340px;
       height: 249px;
     }
-    @media screen and (max-width: 1024px) {
+    @media screen and (max-width: 1097px) {
       width: 300px;
       height: 230px;
     }
-    @media screen and (max-width: 768px) {
+    @media screen and (max-width: 977px) {
+      width: 360px;
+      height: 269px;
+    }
+    @media screen and (max-width: 777px) {
       width: 340px;
       height: 249px;
-    }
-    @media screen and (max-width: 736px) {
-      width: 300px;
-      height: 230px;
     }
 
-    @media screen and (max-width: 657px) {
-      width: 250px;
+    @media screen and (max-width: 737px) {
+      width: 280px;
       height: 205px;
     }
-    @media screen and (max-width: 557px) {
+
+    @media screen and (max-width: 617px) {
       width: 340px;
       height: 249px;
     }
-    @media screen and (max-width: 320px) {
+    @media screen and (max-width: 400px) {
       width: 280px;
       height: 205px;
     }
@@ -66,6 +76,7 @@
     height: 52%;
     cursor: pointer;
     padding: 0;
+    white-space: pre-wrap;
 
     .nameTextBlock {
       margin-left: 15px;

@@ -6,17 +6,11 @@ type Props = {
   page: number;
   onChange: (currentPage: number) => void;
   currentPage: number;
-  isDark: boolean;
 };
-export function Page({ page, onChange, currentPage, isDark }: Props) {
+export function Page({ page, onChange, currentPage }: Props) {
   const pageClass = clsx(
     Styles.page,
     currentPage === page && Styles.pageActive,
-    currentPage === page &&
-      isDark &&
-      Styles.pageActive &&
-      Styles.darkActivePage,
-    isDark && Styles.dark,
   );
   return (
     <>

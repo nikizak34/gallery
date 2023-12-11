@@ -51,6 +51,7 @@ export function Pagination({
         disabled={disable.left}
         className={buttonLeft}
         onClick={handleFirstPageClick}
+        aria-label="arrow left"
       >
         <ArrayDoubleL className={arrayL} />
       </button>
@@ -59,6 +60,7 @@ export function Pagination({
         type="button"
         onClick={handlePrevPageClick}
         disabled={disable.left}
+        aria-label="arrow left"
       >
         <ArrayL className={arrayL} />
       </button>
@@ -75,6 +77,7 @@ export function Pagination({
         type="button"
         onClick={handleNextPageClick}
         disabled={disable.right}
+        aria-label="arrow right"
       >
         <ArrowR className={arrayR} />
       </button>
@@ -83,6 +86,7 @@ export function Pagination({
         className={buttonRight}
         type="button"
         disabled={disable.right}
+        aria-label="arrow right"
       >
         <ArrayDoubleR className={arrayR} />
       </button>

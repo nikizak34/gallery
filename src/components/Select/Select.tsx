@@ -48,7 +48,12 @@ export const SelectComponent = forwardRef<
           <ArrowIconBottom className={s.IconArrow} />
         </Select.Trigger>
         {value !== defaultValue && (
-          <button className={s.IconDel} onClick={DeleteHandler} type="button">
+          <button
+            className={s.IconDel}
+            onClick={DeleteHandler}
+            type="button"
+            aria-label="delete button"
+          >
             <img src={Del} alt="" />
           </button>
         )}

@@ -7,7 +7,7 @@ export const baseApi = createApi({
   }),
   endpoints: (builder) => {
     return {
-      getPainting: builder.query<PaintingDataType, GetPaintingRequest>({
+      getPainting: builder.query<PaintingData, GetPaintingRequest>({
         query: ({
           currentPage = 1,
           search,
@@ -19,15 +19,15 @@ export const baseApi = createApi({
           return `paintings?_page=${currentPage}&_limit=12&name_like=${search}&authorId_like=${authorId}&locationId_like=${locationId}&created_gte=${fCreated}&created_lte=${bCreated}`;
         },
       }),
-      getPaintingFull: builder.query<PaintingDataType, GetPaintingRequest>({
+      getPaintingFullPage: builder.query<PaintingData, GetPaintingRequest>({
         query: ({ search, authorId, locationId, fCreated, bCreated }) => {
           return `paintings?name_like=${search}&authorId_like=${authorId}&locationId_like=${locationId}&created_gte=${fCreated}&created_lte=${bCreated}`;
         },
       }),
-      getAuthors: builder.query<AuthorsDataType, void>({
+      getAuthors: builder.query<AuthorsData, void>({
         query: () => `authors`,
       }),
-      getLocation: builder.query<LocationDataType, void>({
+      getLocation: builder.query<LocationData, void>({
         query: () => `locations`,
       }),
     };
@@ -35,17 +35,17 @@ export const baseApi = createApi({
 });
 
 export const {
-  useGetPaintingFullQuery,
+  useGetPaintingFullPageQuery,
   useGetPaintingQuery,
   useGetAuthorsQuery,
   useGetLocationQuery,
 } = baseApi;
 
-export type PaintingDataType = {
-  data: PaintingType[];
+export type PaintingData = {
+  data: PaintingRequest[];
   isLoading: boolean;
 };
-export type PaintingType = {
+export type PaintingRequest = {
   authorId: number;
   created: string;
   id: number;
@@ -63,19 +63,19 @@ type GetPaintingRequest = {
   bCreated?: string;
 };
 
-export type AuthorsDataType = {
-  data: AuthorsType[];
+export type AuthorsData = {
+  data: Authors[];
 };
-export type AuthorsType = {
+export type Authors = {
   id: number;
   name: string;
 };
 
-export type LocationDataType = {
-  data: LocationType[];
+export type LocationData = {
+  data: Location[];
 };
 
-export type LocationType = {
+export type Location = {
   id: number;
   location: string;
 };

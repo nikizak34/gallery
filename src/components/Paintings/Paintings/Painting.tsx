@@ -1,11 +1,11 @@
 import React, { useState } from "react";
 import s from "./Painting.module.scss";
-import { PaintingType } from "../../../services/base-api";
+import { PaintingRequest } from "../../../services/base-api";
 import { Author } from "./Author/Author";
 import { Location } from "./Location/Location";
 
 type Props = {
-  painting: PaintingType;
+  painting: PaintingRequest;
 };
 
 export function Painting({ painting }: Props) {

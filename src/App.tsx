@@ -4,12 +4,12 @@ import s from "./App.module.scss";
 import { ReactComponent as LogoIcon } from "./assets/image/Frame 238.svg";
 import { ReactComponent as ThemeIcon } from "./assets/image/Frame 237.svg";
 import {
-  AuthorsDataType,
-  LocationDataType,
-  PaintingDataType,
+  AuthorsData,
+  LocationData,
+  PaintingData,
   useGetAuthorsQuery,
   useGetLocationQuery,
-  useGetPaintingFullQuery,
+  useGetPaintingFullPageQuery,
   useGetPaintingQuery,
 } from "./services/base-api";
 import { useDebounce } from "./hooks/useDebounce";
@@ -59,18 +59,17 @@ function App() {
 
   const { setTheme } = useTheme();
 
-  const { data: paintingData, isLoading } =
-    useGetPaintingQuery<PaintingDataType>({
-      currentPage,
-      search,
-      authorId,
-      locationId,
-      fCreated,
-      bCreated,
-    });
-  const { data: locationData } = useGetLocationQuery<LocationDataType>();
-  const { data: authorData } = useGetAuthorsQuery<AuthorsDataType>();
-  const { data } = useGetPaintingFullQuery<PaintingDataType>({
+  const { data: paintingData, isLoading } = useGetPaintingQuery<PaintingData>({
+    currentPage,
+    search,
+    authorId,
+    locationId,
+    fCreated,
+    bCreated,
+  });
+  const { data: locationData } = useGetLocationQuery<LocationData>();
+  const { data: authorData } = useGetAuthorsQuery<AuthorsData>();
+  const { data } = useGetPaintingFullPageQuery<PaintingData>({
     search,
     authorId,
     locationId,

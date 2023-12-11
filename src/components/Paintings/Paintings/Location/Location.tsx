@@ -1,16 +1,17 @@
 import React from "react";
 import s from "../Painting.module.scss";
 import {
-  LocationDataType,
-  PaintingType,
+  LocationData,
+  PaintingRequest,
   useGetLocationQuery,
 } from "../../../../services/base-api";
 
 type Props = {
-  painting: PaintingType;
+  painting: PaintingRequest;
 };
+
 export function Location({ painting }: Props) {
-  const { data: locationData } = useGetLocationQuery<LocationDataType>();
+  const { data: locationData } = useGetLocationQuery<LocationData>();
   return (
     <>
       {locationData?.map((el) =>

@@ -1,16 +1,16 @@
 import React from "react";
 import s from "../Painting.module.scss";
 import {
-  AuthorsDataType,
-  PaintingType,
+  AuthorsData,
+  PaintingRequest,
   useGetAuthorsQuery,
 } from "../../../../services/base-api";
 
 type Props = {
-  painting: PaintingType;
+  painting: PaintingRequest;
 };
 export function Author({ painting }: Props) {
-  const { data: authorData } = useGetAuthorsQuery<AuthorsDataType>();
+  const { data: authorData } = useGetAuthorsQuery<AuthorsData>();
   return (
     <div>
       {authorData?.map((el) =>

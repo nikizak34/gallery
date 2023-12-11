@@ -1,10 +1,10 @@
 import React from "react";
-import { PaintingType } from "../../services/base-api";
-import { Painting } from "./Paintings/Painting";
 import s from "./Paintings/Painting.module.scss";
+import { Painting } from "./Paintings/Painting";
+import { PaintingRequest } from "../../services/base-api";
 
 type Props = {
-  paintingData: PaintingType[];
+  paintingData: PaintingRequest[];
 };
 
 export function Paintings({ paintingData }: Props) {

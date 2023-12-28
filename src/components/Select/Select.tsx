@@ -7,7 +7,7 @@ import {
 import * as Select from "@radix-ui/react-select";
 import * as ScrollArea from "@radix-ui/react-scroll-area";
 import s from "./Select.module.scss";
-import { ReactComponent as ArrowIconBottom } from "../../assets/image/Vector 56.svg";
+import ArrowIconBottom from "../../assets/image/Vector 56.svg?react";
 import Del from "../../assets/image/Union.svg";
 
 export type SelectProps = {

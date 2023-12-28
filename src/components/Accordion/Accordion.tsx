@@ -1,6 +1,6 @@
 import React, { ChangeEvent } from "react";
 import * as Popover from "@radix-ui/react-popover";
-import { ReactComponent as ArrowIcon } from "../../assets/image/Vector 56.svg";
+import ArrowIcon from "./../../assets/image/Vector 56.svg?react";
 import s from "./Accordion.module.scss";
 
 type Props = {

@@ -1,10 +1,10 @@
 import React from "react";
 import clsx from "clsx";
 import Styles from "./Pagination.module.scss";
-import { ReactComponent as ArrowR } from "../../assets/image/ArrayR.svg";
-import { ReactComponent as ArrayDoubleR } from "../../assets/image/ArrayDoubleR.svg";
-import { ReactComponent as ArrayDoubleL } from "../../assets/image/ArrayDoubleL.svg";
-import { ReactComponent as ArrayL } from "../../assets/image/ArrayL.svg";
+import ArrowR from "../../assets/image/ArrayR.svg?react";
+import ArrayDoubleR from "../../assets/image/ArrayDoubleR.svg?react";
+import ArrayDoubleL from "../../assets/image/ArrayDoubleL.svg?react";
+import ArrayL from "../../assets/image/ArrayL.svg?react";
 import { createPages } from "../../utils/create-pages";
 import { Page } from "./Page/Page";
 

@@ -1,8 +1,8 @@
 import React, { ChangeEvent } from "react";
 import { Paintings } from "./components/Paintings/Paintings";
 import s from "./App.module.scss";
-import { ReactComponent as LogoIcon } from "./assets/image/Frame 238.svg";
-import { ReactComponent as ThemeIcon } from "./assets/image/Frame 237.svg";
+import LogoIcon from "./assets/image/Frame 238.svg?react";
+import ThemeIcon from "./assets/image/Frame 237.svg?react";
 import {
   AuthorsData,
   LocationData,

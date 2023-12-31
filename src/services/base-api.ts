@@ -57,8 +57,8 @@ export type PaintingRequest = {
 type GetPaintingRequest = {
   currentPage?: number;
   search?: string;
-  authorId?: any;
-  locationId?: any;
+  authorId?: string;
+  locationId?: string;
   fCreated?: string;
   bCreated?: string;
 };

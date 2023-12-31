@@ -9,7 +9,7 @@ import { createPages } from "../../utils/create-pages";
 import { Page } from "./Page/Page";
 
 type PaginationProps = {
-  onChange: (value: any) => void;
+  onChange: (value: number) => void;
   currentPage: number;
   pageNumber: number;
 };
